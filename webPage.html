@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>TLСonvertor</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div class="wrapper">
+		<header>
+			<div class="view">
+				<div class="headerLogo">TLConverter</div>
+				<div class="controlPanel">
+					<input type="checkbox" name="rGroup" value="1" id="r1" checked="checked" />
+				    <label class="whatever" for="r1">Size</label>
+				    <input type="checkbox" name="rGroup" value="2" id="r2" checked="checked" />
+				    <label class="whatever" for="r2">Font</label>
+				    <input type="checkbox" name="rGroup" value="3" id="r3" />
+				    <label class="whatever" for="r3">Auto</label>
+				    <input type="checkbox" name="rGroup" value="4" id="r4" />
+				    <label class="whatever" for="r4">Info</label>
+				</div>
+			</div>
+		</header>
+		<main>
+			<div class="view" id="textarea">
+				<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
+				<textarea name="editor1" id="editor1" cols="30" rows="10">
+					Привет!
+				</textarea>
+				
+				<script type="text/javascript">
+					CKEDITOR.replace( 'editor1', {
+						allowedContent: true,
+						toolbar: []
+						//https://notare-hw.de/_scripts/3rdparty/ckeditor/samples/old/datafiltering.html
+					} );
+	            </script>
+	        
+
+				
+				<!--
+				<div class="navbar">
+				  <a href="#home">Home</a>
+				  <a href="#news">News</a>
+				  <div class="dropdown">
+				    <button class="dropbtn">More 
+				      <i class="fa fa-caret-down"></i>
+				    </button>
+				    <div class="dropdown-content">
+				      <a href="#">Link 1</a>
+				      <a href="#">Link 2</a>
+				      <a href="#">Link 3</a>
+				    </div>
+				  </div> 
+				</div>
+				-->
+			</div>
+		</main>
+		<footer>
+			<div class="view">
+				<div class="placeForButton">
+					<button id="changeHtml" type="button" onclick="processHtmlCode()">Click!</button>
+				</div>
+			</div>
+		</footer>
+	</div>
+	<script src="action.js" type="text/javascript"></script>
+</body>
+</html>
