@@ -68,20 +68,3 @@ https://regex101.com/
 https://webdesign.tutsplus.com/tutorials/how-to-build-a-full-screen-responsive-page-with-flexbox--cms-32086
 https://ckeditor.com/docs/ckeditor4/latest/
 */
-
-/*
-To DO List:
-* Immidiat changing after pasting
-* Appearing a button in the middle of the screan that suggest to copy/copyAgain or input a new text
-* Add info
-* Add reusebillity
-* Add footer
-* Add Flexability
-* Add cookies
-* Changing result with chackbox after pasting
-* Make it pretty
-*   borders for main
-*   make footer before main
-*   correct height of CKEditor
-*   scrollbar
-*/
