@@ -93,8 +93,8 @@ main {
   margin-left:auto;
   margin-right:auto;
   background-color: #fff;
-  border-left: 1px dashed var(--main-light-gray-color);
-  border-right: 1px dashed var(--main-light-gray-color);
+  border-left: 2px dashed var(--main-light-gray-color);
+  border-right: 2px dashed var(--main-light-gray-color);
 }
 
 footer {
