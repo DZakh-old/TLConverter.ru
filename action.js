@@ -16,7 +16,6 @@ function processHtmlCode() {
       textareaData = textareaData.replace(/ style="background:white"/gim, '');
       textareaData = textareaData.replace(/margin\S+px; /gim, '');
       textareaData = textareaData.replace(/ margin\S+px/gim, '');
-
       textareaData = textareaData.replace(/ lang="RU"/gim, '');
     }
   function replaceMostFrequentSize() {
