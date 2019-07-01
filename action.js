@@ -1,37 +1,55 @@
 'use strict';
 
-function processHtmlCode(evtData) {
-  replaceEssentialStuff();
-  if (document.getElementById("r1").checked) replaceMostFrequentSize();
-  if (document.getElementById("r2").checked) replaceMostFrequentFont();
+let originData;
 
-  changeView();
-  if (document.getElementById("r3").checked) copyStringToClipboard( evtData );
+function processHtmlCode(evtData) {
+  originData = evtData;
+  replacement(evtData);
+  CKEDITOR.instances.editor1.setMode('source');
+}
+
+function pressedButton() {
+  if (CKEDITOR.instances.editor1.mode == 'source')
+    replacement(originData);
+}
+
+function replacement(workingData) {
+  replaceEssentialStuff();
+  if (document.getElementById("button1").checked) 
+    replaceMostFrequentSize();
+  if (document.getElementById("button2").checked) 
+    replaceMostFrequentFont();
+
+  if (document.getElementById("button3").checked) 
+    copyStringToClipboard(workingData);
+
+  CKEDITOR.instances.editor1.setData(workingData);
+
+
 
   function replaceEssentialStuff() {
-    evtData = evtData.replace(/&quot;Courier New&quot;/gim, 'Courier');
-    evtData = evtData.replace(/ style="color:black"/gim, '');
-    evtData = evtData.replace(/ style="background:white"/gim, '');
-    evtData = evtData.replace(/margin\S+px; /gim, '');
-    evtData = evtData.replace(/ margin\S+px/gim, '');
-    evtData = evtData.replace(/ lang="RU"/gim, '');
+    workingData = workingData.replace(/&quot;Courier New&quot;/gim, 'Courier');
+    workingData = workingData.replace(/ style="color:black"/gim, '');
+    workingData = workingData.replace(/ style="background:white"/gim, '');
+    workingData = workingData.replace(/margin\S+px; /gim, '');
+    workingData = workingData.replace(/ margin\S+px/gim, '');
+    workingData = workingData.replace(/ lang="RU"/gim, '');
   }
+
   function replaceMostFrequentSize() {
     let regexForSerching = /(?<= style="font-size:)\S+(?=pt")/gim;
-    let arrayOfSizes = evtData.match(regexForSerching);
+    let arrayOfSizes = workingData.match(regexForSerching);
     let regexForReplacing = RegExp(' style="font-size:' + mode(arrayOfSizes) + 'pt"', 'gim');
-    evtData = evtData.replace(regexForReplacing, '');
+    workingData = workingData.replace(regexForReplacing, '');
   }
+
   function replaceMostFrequentFont() {
     let regexForSerching = /(?<= style="font-family:)\S+(?=")/gim;
-    let arrayOfSizes = evtData.match(regexForSerching);
+    let arrayOfSizes = workingData.match(regexForSerching);
     let regexForReplacing = RegExp(' style="font-family:' + mode(arrayOfSizes) + '"', 'gim');
-  	evtData = evtData.replace(regexForReplacing, '');
-  }
-  function changeView() {
-    CKEDITOR.instances.editor1.setData(evtData);
-    CKEDITOR.instances.editor1.setMode('source');
+    workingData = workingData.replace(regexForReplacing, '');
   } 
+
   // Source: https://techoverflow.net/2018/03/30/copying-strings-to-the-clipboard-using-pure-javascript/
   function copyStringToClipboard (str) {
     // Create new element
@@ -49,6 +67,7 @@ function processHtmlCode(evtData) {
     // Remove temporary element
     document.body.removeChild(el);
   }
+
   // Source: https://stackoverflow.com/questions/1053843/get-the-element-with-the-highest-occurrence-in-an-array
   function mode(arr){
     return arr.sort((a, b) =>
