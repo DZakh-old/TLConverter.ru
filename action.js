@@ -1,37 +1,35 @@
 'use strict';
 
-function processHtmlCode() {
-  let textareaData = CKEDITOR.instances.editor1.getData();
-  
+function processHtmlCode(evtData) {
   replaceEssentialStuff();
   if (document.getElementById("r1").checked) replaceMostFrequentSize();
   if (document.getElementById("r2").checked) replaceMostFrequentFont();
 
   changeView();
-  if (document.getElementById("r3").checked) copyStringToClipboard( textareaData );
+  if (document.getElementById("r3").checked) copyStringToClipboard( evtData );
 
   function replaceEssentialStuff() {
-      textareaData = textareaData.replace(/&quot;Courier New&quot;/gim, 'Courier');
-      textareaData = textareaData.replace(/ style="color:black"/gim, '');
-      textareaData = textareaData.replace(/ style="background:white"/gim, '');
-      textareaData = textareaData.replace(/margin\S+px; /gim, '');
-      textareaData = textareaData.replace(/ margin\S+px/gim, '');
-      textareaData = textareaData.replace(/ lang="RU"/gim, '');
+      evtData = evtData.replace(/&quot;Courier New&quot;/gim, 'Courier');
+      evtData = evtData.replace(/ style="color:black"/gim, '');
+      evtData = evtData.replace(/ style="background:white"/gim, '');
+      evtData = evtData.replace(/margin\S+px; /gim, '');
+      evtData = evtData.replace(/ margin\S+px/gim, '');
+      evtData = evtData.replace(/ lang="RU"/gim, '');
     }
   function replaceMostFrequentSize() {
-    let regexForSerching = /(?<= style="font-size:).+(?=pt")/gim;
-    let arrayOfSizes = textareaData.match(regexForSerching);
+    let regexForSerching = /(?<= style="font-size:)\S+(?=pt")/gim;
+    let arrayOfSizes = evtData.match(regexForSerching);
     let regexForReplacing = RegExp(' style="font-size:' + mode(arrayOfSizes) + 'pt"', 'gim');
-  	textareaData = textareaData.replace(regexForReplacing, '');
+    evtData = evtData.replace(regexForReplacing, '');
   }
   function replaceMostFrequentFont() {
     let regexForSerching = /(?<= style="font-family:)\S+(?=")/gim;
-    let arrayOfSizes = textareaData.match(regexForSerching);
+    let arrayOfSizes = evtData.match(regexForSerching);
     let regexForReplacing = RegExp(' style="font-family:' + mode(arrayOfSizes) + '"', 'gim');
-  	textareaData = textareaData.replace(regexForReplacing, '');
+  	evtData = evtData.replace(regexForReplacing, '');
   }
   function changeView() {
-    CKEDITOR.instances.editor1.setData(textareaData);
+    CKEDITOR.instances.editor1.setData(evtData);
     CKEDITOR.instances.editor1.setMode('source');
   } 
   // Source: https://techoverflow.net/2018/03/30/copying-strings-to-the-clipboard-using-pure-javascript/

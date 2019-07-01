@@ -25,18 +25,17 @@
 		<main>
 			<div class="view" id="textarea">
 				<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
-				<textarea name="editor1" id="editor1" cols="30" rows="10">
-					Привет!
-				</textarea>
-				
+				<textarea name="editor1" id="editor1" cols="30" rows="10"></textarea>	
 				<script type="text/javascript">
 					CKEDITOR.replace( 'editor1', {
 						allowedContent: true,
 						toolbar: []
 						//https://notare-hw.de/_scripts/3rdparty/ckeditor/samples/old/datafiltering.html
 					} );
+					CKEDITOR.instances.editor1.on( 'paste', function(evt) {
+						processHtmlCode(evt.data.dataValue);
+					} );
 	            </script>
-	        
 
 				
 				<!--
@@ -59,9 +58,7 @@
 		</main>
 		<footer>
 			<div class="view">
-				<div class="placeForButton">
-					<button id="changeHtml" type="button" onclick="processHtmlCode()">Click!</button>
-				</div>
+				<p>dmirdDZ@gmail.com</p>
 			</div>
 		</footer>
 	</div>
