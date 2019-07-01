@@ -29,15 +29,13 @@
 				<script type="text/javascript">
 					CKEDITOR.replace( 'editor1', {
 						allowedContent: true,
-						toolbar: []
 						//https://notare-hw.de/_scripts/3rdparty/ckeditor/samples/old/datafiltering.html
+						toolbar: [],
 					} );
 					CKEDITOR.instances.editor1.on( 'paste', function(evt) {
 						processHtmlCode(evt.data.dataValue);
 					} );
-	            </script>
-
-				
+	            </script>				
 				<!--
 				<div class="navbar">
 				  <a href="#home">Home</a>
@@ -55,6 +53,7 @@
 				</div>
 				-->
 			</div>
+			<div class="view" id="navBoard"></div>
 		</main>
 		<footer>
 			<div class="view">

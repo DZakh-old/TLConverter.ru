@@ -13,6 +13,11 @@ function pressedButton() {
     replacement(originData);
 }
 
+let navBoard = document.getElementById('navBoard');
+navBoard.addEventListener('click', function (event) {
+  navBoard.style.display = "none";
+} );
+
 function replacement(workingData) {
   replaceEssentialStuff();
   if (document.getElementById("button1").checked) 
@@ -24,8 +29,6 @@ function replacement(workingData) {
     copyStringToClipboard(workingData);
 
   CKEDITOR.instances.editor1.setData(workingData);
-
-
 
   function replaceEssentialStuff() {
     workingData = workingData.replace(/&quot;Courier New&quot;/gim, 'Courier');
@@ -83,4 +86,10 @@ https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expression
 https://regex101.com/
 https://webdesign.tutsplus.com/tutorials/how-to-build-a-full-screen-responsive-page-with-flexbox--cms-32086
 https://ckeditor.com/docs/ckeditor4/latest/
+
+
+
+Possible function:
+https://www.w3schools.com/js/js_htmldom_eventlistener.how-to-build-a-full-screen-responsive-page-with-flexbox--cms-32086
+https://stackoverflow.com/questions/2010335/ckeditor-onpaste-event
 */

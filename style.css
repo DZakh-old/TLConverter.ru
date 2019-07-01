@@ -89,14 +89,24 @@ main {
   bottom: 0;
   left:0;
   right:0;
-  margin-left:auto;
-  margin-right:auto;
   background: #fff;
   padding: 1px;
   border-left: 2px dashed var(--main-light-gray-color);
   border-right: 2px dashed var(--main-light-gray-color);
 }
 
+#navBoard {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left:0;
+  right:0;
+  background: rgba(0,0,0,0.5);
+}
+
+/*
+* --- FOOTER ---
+*/
 footer {
   height: 30px;
   width: 100%;
