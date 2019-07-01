@@ -12,7 +12,8 @@
 body {
   font-family: Areal, sans-serif;
   overflow: hidden;
-  user-select: none; /* Works only in Chrome */ 
+  user-select: none; /* Works only in Chrome */
+  color: #fff;
 }
 
 /* 
@@ -44,15 +45,13 @@ header {
 .headerLogo {
   font-variant: small-caps;
   margin-top: 10.5px;
-  color: #fff;
   font-weight: 400;
   font-size: 32pt;
   float: left;
   /*cursor: pointer;*/
 }
 
-.whatever{
-  color: #fff;
+.buttons{
   background-color: var(--main-light-gray-color);
   border: 1px solid var(--main-dark-gray-color);
   border-bottom: none;
@@ -71,7 +70,7 @@ header {
   display: none;
 }
 
-.controlPanel input[type=checkbox]:checked + .whatever{
+.controlPanel input[type=checkbox]:checked + .buttons{
   background-color: var(--main-dark-gray-color);
 }
 
@@ -92,7 +91,8 @@ main {
   right:0;
   margin-left:auto;
   margin-right:auto;
-  background-color: #fff;
+  background: #fff;
+  padding: 1px;
   border-left: 2px dashed var(--main-light-gray-color);
   border-right: 2px dashed var(--main-light-gray-color);
 }

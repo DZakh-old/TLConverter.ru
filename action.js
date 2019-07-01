@@ -9,13 +9,13 @@ function processHtmlCode(evtData) {
   if (document.getElementById("r3").checked) copyStringToClipboard( evtData );
 
   function replaceEssentialStuff() {
-      evtData = evtData.replace(/&quot;Courier New&quot;/gim, 'Courier');
-      evtData = evtData.replace(/ style="color:black"/gim, '');
-      evtData = evtData.replace(/ style="background:white"/gim, '');
-      evtData = evtData.replace(/margin\S+px; /gim, '');
-      evtData = evtData.replace(/ margin\S+px/gim, '');
-      evtData = evtData.replace(/ lang="RU"/gim, '');
-    }
+    evtData = evtData.replace(/&quot;Courier New&quot;/gim, 'Courier');
+    evtData = evtData.replace(/ style="color:black"/gim, '');
+    evtData = evtData.replace(/ style="background:white"/gim, '');
+    evtData = evtData.replace(/margin\S+px; /gim, '');
+    evtData = evtData.replace(/ margin\S+px/gim, '');
+    evtData = evtData.replace(/ lang="RU"/gim, '');
+  }
   function replaceMostFrequentSize() {
     let regexForSerching = /(?<= style="font-size:)\S+(?=pt")/gim;
     let arrayOfSizes = evtData.match(regexForSerching);
@@ -34,26 +34,26 @@ function processHtmlCode(evtData) {
   } 
   // Source: https://techoverflow.net/2018/03/30/copying-strings-to-the-clipboard-using-pure-javascript/
   function copyStringToClipboard (str) {
-     // Create new element
-     var el = document.createElement('textarea');
-     // Set value (string to be copied)
-     el.value = str;
-     // Set non-editable to avoid focus and move outside of view
-     el.setAttribute('readonly', '');
-     el.style = {position: 'absolute', left: '-9999px'};
-     document.body.appendChild(el);
-     // Select text inside element
-     el.select();
-     // Copy text to clipboard
-     document.execCommand('copy');
-     // Remove temporary element
-     document.body.removeChild(el);
+    // Create new element
+    var el = document.createElement('textarea');
+    // Set value (string to be copied)
+    el.value = str;
+    // Set non-editable to avoid focus and move outside of view
+    el.setAttribute('readonly', '');
+    el.style = {position: 'absolute', left: '-9999px'};
+    document.body.appendChild(el);
+    // Select text inside element
+    el.select();
+    // Copy text to clipboard
+    document.execCommand('copy');
+    // Remove temporary element
+    document.body.removeChild(el);
   }
   // Source: https://stackoverflow.com/questions/1053843/get-the-element-with-the-highest-occurrence-in-an-array
   function mode(arr){
     return arr.sort((a, b) =>
-          arr.filter(v => v===a).length
-        - arr.filter(v => v===b).length
+        arr.filter(v => v===a).length
+      - arr.filter(v => v===b).length
     ).pop();
   }
 }
