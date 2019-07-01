@@ -16,6 +16,7 @@ function pressedButton() {
 let navBoard = document.getElementById('navBoard');
 navBoard.addEventListener('click', function (event) {
   navBoard.style.display = "none";
+  CKEDITOR.instances.editor1.focus();
 } );
 
 function replacement(workingData) {
