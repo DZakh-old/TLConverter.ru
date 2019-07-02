@@ -8,25 +8,34 @@ function processHtmlCode(evtData) {
   CKEDITOR.instances.editor1.setMode('source');
 }
 
-function pressedButton() {
+function pressedSwitch() {
   if (CKEDITOR.instances.editor1.mode == 'source')
     replacement(originData);
 }
 
-let navBoard = document.getElementById('navBoard');
-navBoard.addEventListener('click', function (event) {
-  navBoard.style.display = "none";
-  CKEDITOR.instances.editor1.focus();
+// Work with the panel above editor
+let firstBoard = document.getElementById('firstBoard');
+firstBoard.addEventListener('click', function(event) {
+  let testBtn = document.getElementById('test');
+  if (isHover(testBtn) != true) {
+    firstBoard.style.display = "none";
+    CKEDITOR.instances.editor1.focus();
+  }
+      //renew CKEditor
 } );
+
+function isHover(element) {
+    return (element.parentElement.querySelector(':hover') === element);
+}
 
 function replacement(workingData) {
   replaceEssentialStuff();
-  if (document.getElementById("button1").checked) 
+  if (document.getElementById("switch1").checked) 
     replaceMostFrequentSize();
-  if (document.getElementById("button2").checked) 
+  if (document.getElementById("switch2").checked) 
     replaceMostFrequentFont();
 
-  if (document.getElementById("button3").checked) 
+  if (document.getElementById("switch3").checked) 
     copyStringToClipboard(workingData);
 
   CKEDITOR.instances.editor1.setData(workingData);
@@ -89,7 +98,7 @@ https://webdesign.tutsplus.com/tutorials/how-to-build-a-full-screen-responsive-p
 https://ckeditor.com/docs/ckeditor4/latest/
 
 
-
+https://stackoverflow.com/questions/9456289/how-to-make-a-div-visible-and-invisible-with-javascript
 Possible function:
 https://www.w3schools.com/js/js_htmldom_eventlistener.how-to-build-a-full-screen-responsive-page-with-flexbox--cms-32086
 https://stackoverflow.com/questions/2010335/ckeditor-onpaste-event
