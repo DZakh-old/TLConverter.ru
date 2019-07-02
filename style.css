@@ -90,7 +90,7 @@ main {
   left:0;
   right:0;
   background: #fff;
-  padding: 1px;
+  padding: 13px 1px 0 19px;
   border-left: 2px dashed var(--main-light-gray-color);
   border-right: 2px dashed var(--main-light-gray-color);
 }
@@ -101,7 +101,7 @@ main {
   bottom: 0;
   right:0;
   background: #fff;
-  padding: 1px;
+  margin-right: 1px;
   width: 18px;
 }
 
@@ -111,7 +111,6 @@ main {
   bottom: 0;
   left:0;
   right:0;
-  background: rgba(0,0,0,0.1); /*delete*/
 }
 
 #secondBoard {
@@ -121,7 +120,6 @@ main {
   left:0;
   right:0;
   display: none;
-  background: rgba(0,0,0,0.1); /*delete*/
 }
 
 /* Source: https://stackoverflow.com/questions/953918/how-to-align-a-div-to-the-middle-horizontally-width-of-the-page */
@@ -148,9 +146,12 @@ main {
 * --- FOOTER ---
 */
 footer {
-  height: 30px;
+  height: 40px;
   width: 100%;
   background-color: var(--main-light-gray-color);
+  position: absolute;
+  z-index: 10;
+  bottom: 0;
 }
 
 
@@ -316,8 +317,3 @@ footer {
   margin: 4px 2px;
   cursor: pointer;
 }
-
-
-
-
- 
