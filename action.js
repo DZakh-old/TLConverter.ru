@@ -4,13 +4,14 @@ let originData;
 
 function processHtmlCode(evtData) {
   originData = evtData;
+  // alert(''); bug with emty paste
   replaceData(evtData);
   CKEDITOR.instances.editor1.setMode('source');
   secondBoard.style.display = "block";
 }
 
 function pressedSwitch() {
-  if (CKEDITOR.instances.editor1.mode == 'source')
+  if (CKEDITOR.instances.editor1.mode === 'source')
     replaceData(originData);
 }
 
@@ -25,18 +26,20 @@ firstBoard.addEventListener('click', function() {
 let secondBoard = document.getElementById('secondBoard');
 secondBoard.addEventListener('click', function() {
   let testBtn = document.getElementById('test');
-  if (isHover(testBtn) == true) {
+  if (isHover(testBtn) === true) {
     copyStringToClipboard(CKEDITOR.instances.editor1.getData());
   } else {
     secondBoard.style.display = "none";
     CKEDITOR.instances.editor1.setData('');
-    CKEDITOR.instances.editor1.setMode('wysiwyg');
-    CKEDITOR.instances.editor1.focus(); //doesn't work
+    /* It is this strange because of a bug with focus */
+    CKEDITOR.instances.editor1.setMode('wysiwyg', function() {
+      CKEDITOR.instances.editor1.focus(); 
+    } );
   }
 } );
 
 function isHover(element) {
-    return (element.parentElement.querySelector(':hover') === element);
+  return (element.parentElement.querySelector(':hover') === element);
 }
 
 function replaceData(workingData) {
