@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">	<!-- Maybe add smth additional -->
+<head>
+	<meta charset="UTF-8">
+	<title>TLСonvertor</title>
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<div class="wrapper">
+		<header>
+			<div class="view">
+				<div class="headerLogo">TLConverter</div>
+				<div class="controlPanel">
+					<input type="checkbox" onclick="pressedSwitch()" id="switch1" checked />
+				    <label class="switches" for="switch1">Size</label>
+				    <input type="checkbox" onclick="pressedSwitch()" id="switch2" checked />
+				    <label class="switches" for="switch2">Font</label>
+				    <input type="checkbox" id="switch3" />
+				    <label class="switches" for="switch3">Auto</label>
+				    <input type="checkbox" id="switch4" />
+				    <label class="switches" for="switch4">Info</label>
+				</div>
+			</div>
+		</header>
+		<main>
+			<div class="view" id="textarea">
+				<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
+				<textarea name="editor1" id="editor1" cols="30" rows="10"></textarea>	
+				<script type="text/javascript">
+					CKEDITOR.replace( 'editor1', {
+						allowedContent: true,
+						//https://notare-hw.de/_scripts/3rdparty/ckeditor/samples/old/datafiltering.html
+						toolbar: [],
+					} );
+					CKEDITOR.instances.editor1.on( 'paste', function(evt) {
+						processHtmlCode(evt.data.dataValue);
+					} );
+	            </script>
+	            <div>
+	            	<!-- Move to the right above the scrollbar -->
+	            </div>		
+				<!--
+				<div class="navbar">
+				  <a href="#home">Home</a>
+				  <a href="#news">News</a>
+				  <div class="dropdown">
+				    <button class="dropbtn">More 
+				      <i class="fa fa-caret-down"></i>
+				    </button>
+				    <div class="dropdown-content">
+				      <a href="#">Link 1</a>
+				      <a href="#">Link 2</a>
+				      <a href="#">Link 3</a>
+				    </div>
+				  </div> 
+				</div>
+				-->
+			</div>
+			<div class="view" id="firstBoard">
+				<div class="centralization">
+					<img src="images/paste-from-clipboard.svg" />
+					<p>Вставьте текст</p>
+				</div>
+			</div>
+			<div class="view" id="secondBoard" >
+				<div class="centralization">
+					<button class="button" id="test">Button</button>
+					<p>или</p>
+					<p>втавьте новый текст</p>
+				</div>
+			</div>
+		</main>
+		<footer>
+			<div class="view">
+				<p>dmirdDZ@gmail.com</p>
+			</div>
+		</footer>
+	</div>
+	<script src="action.js" type="text/javascript"></script>
+</body>
+</html>

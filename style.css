@@ -12,7 +12,8 @@
 body {
   font-family: Areal, sans-serif;
   overflow: hidden;
-  user-select: none; /* Works only in Chrome */ 
+  user-select: none; /* Works only in Chrome */
+  color: #fff;
 }
 
 /* 
@@ -44,15 +45,13 @@ header {
 .headerLogo {
   font-variant: small-caps;
   margin-top: 10.5px;
-  color: #fff;
-  font-weight: 400;
-  font-size: 32pt;
+  font-weight: normal;
+  font-size: 2.5em;
   float: left;
   /*cursor: pointer;*/
 }
 
-.whatever{
-  color: #fff;
+.switches{
   background-color: var(--main-light-gray-color);
   border: 1px solid var(--main-dark-gray-color);
   border-bottom: none;
@@ -71,7 +70,7 @@ header {
   display: none;
 }
 
-.controlPanel input[type=checkbox]:checked + .whatever{
+.controlPanel input[type=checkbox]:checked + .switches{
   background-color: var(--main-dark-gray-color);
 }
 
@@ -90,13 +89,34 @@ main {
   bottom: 0;
   left:0;
   right:0;
-  margin-left:auto;
-  margin-right:auto;
-  background-color: #fff;
+  background: #fff;
+  padding: 1px;
   border-left: 2px dashed var(--main-light-gray-color);
   border-right: 2px dashed var(--main-light-gray-color);
 }
 
+#firstBoard {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left:0;
+  right:0;
+  background: rgba(0,0,0,0.1); /*delete*/
+}
+
+#secondBoard {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left:0;
+  right:0;
+  display: none;
+  background: rgba(0,0,0,0.5); /*delete*/
+}
+
+/*
+* --- FOOTER ---
+*/
 footer {
   height: 30px;
   width: 100%;
@@ -253,6 +273,39 @@ footer {
 
 
 
+
+.button {
+  background-color: #555;
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+/* Source: https://stackoverflow.com/questions/953918/how-to-align-a-div-to-the-middle-horizontally-width-of-the-page */
+.centralization {
+  position: absolute;
+  width: 20vh;
+  height: 20vh;
+  top: 50%;
+  left: 50%;
+  margin: -10vh 0 0 -10vh;
+  text-align: center;
+  color: black;
+  font-variant: small-caps;
+  font-weight: bolder;
+  font-size: 1em;
+}
+
+.centralization img {
+    width: 60%;
+    height: auto;
+}
 
 
  
