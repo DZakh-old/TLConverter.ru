@@ -16,12 +16,12 @@ body
 	/* Remove the background color to make it transparent. 
 	background-color: #fff;*/
 
-	margin: 20px;
+	margin: 18px;
 }
 
 .cke_editable
 {
-	font-size: 24px;
+	font-size: 12px;
 	line-height: 1.6;
 	/* Fix for missing scrollbars with RTL texts. (#10488) */
 	word-wrap: break-word;
