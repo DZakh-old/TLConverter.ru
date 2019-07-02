@@ -95,6 +95,16 @@ main {
   border-right: 2px dashed var(--main-light-gray-color);
 }
 
+#scrollGag {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right:0;
+  background: #fff;
+  padding: 1px;
+  width: 18px;
+}
+
 #firstBoard {
   position: absolute;
   top: 0;
@@ -111,7 +121,27 @@ main {
   left:0;
   right:0;
   display: none;
-  background: rgba(0,0,0,0.5); /*delete*/
+  background: rgba(0,0,0,0.1); /*delete*/
+}
+
+/* Source: https://stackoverflow.com/questions/953918/how-to-align-a-div-to-the-middle-horizontally-width-of-the-page */
+.centralization {
+  position: absolute;
+  width: 40vh;
+  height: 20vh;
+  top: 50%;
+  left: 50%;
+  margin: -10vh 0 0 -20vh;
+  text-align: center;
+  color: black;
+  font-variant: small-caps;
+  font-weight: bolder;
+  font-size: 1em;
+}
+
+.centralization img {
+    width: 15%;
+    height: auto;
 }
 
 /*
@@ -287,25 +317,7 @@ footer {
   cursor: pointer;
 }
 
-/* Source: https://stackoverflow.com/questions/953918/how-to-align-a-div-to-the-middle-horizontally-width-of-the-page */
-.centralization {
-  position: absolute;
-  width: 20vh;
-  height: 20vh;
-  top: 50%;
-  left: 50%;
-  margin: -10vh 0 0 -10vh;
-  text-align: center;
-  color: black;
-  font-variant: small-caps;
-  font-weight: bolder;
-  font-size: 1em;
-}
 
-.centralization img {
-    width: 60%;
-    height: auto;
-}
 
 
  
