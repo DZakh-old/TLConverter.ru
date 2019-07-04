@@ -50,6 +50,7 @@ function isHover(element) {
 
 function replaceData(workingData) {
   replaceEssentialStuff();
+  fixEmptyParagraphs();
   if (document.getElementById("switch1").checked) 
     replaceMostFrequentSize();
   if (document.getElementById("switch2").checked) 
@@ -67,8 +68,10 @@ function replaceData(workingData) {
     workingData = workingData.replace(/margin\S+px; /gim, '');
     workingData = workingData.replace(/ margin\S+px/gim, '');
     workingData = workingData.replace(/ lang="RU"/gim, '');
-    //space paragraphs
-    //workingData = workingData.replace(/ <span\S+><\/span>/gim, ' <span\S+>&nbsp<\/span>');
+  }
+
+  function fixEmptyParagraphs() {
+    workingData = workingData.replace(/(?<=\W)><\/span>(?=<\/span>)/gim, '>&nbsp;</span>');
   }
 
   function replaceMostFrequentSize() {
