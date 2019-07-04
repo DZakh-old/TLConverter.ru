@@ -4,7 +4,6 @@
  */
 
 CKEDITOR.editorConfig = function( config ) {
-	//config.extraPlugins = 'autogrow';
 	config.extraPlugins = 'pasteFromGoogleDoc';
 	config.removePlugins = "toolbar,elementspath";
 	config.resize_enabled = false;
