@@ -1,8 +1,8 @@
 'use strict';
 
 let originData;
-let firstBoard = document.getElementById('firstBoard');
-let secondBoard = document.getElementById('secondBoard');
+let firstBoard = document.getElementById('first-board');
+let secondBoard = document.getElementById('second-board');
 
 function processHtmlCode(evtData) {
   firstBoard.style.display = "none";
@@ -31,9 +31,11 @@ secondBoard.addEventListener('click', function() {
     copyStringToClipboard(CKEDITOR.instances.editor1.getData());
   } else {
     secondBoard.style.display = "none";
-    CKEDITOR.instances.editor1.setMode('wysiwyg');
-    CKEDITOR.instances.editor1.focus(); 
     CKEDITOR.instances.editor1.setData('');
+    /* It is this strange because of a bug with focus */
+    CKEDITOR.instances.editor1.setMode('wysiwyg', function() {
+      CKEDITOR.instances.editor1.focus(); 
+    } );
     firstBoard.style.display = "block";
   }
 } );

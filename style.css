@@ -45,7 +45,7 @@ header {
   height: 70px
 }
 
-.headerLogo {
+.header-logo {
   font-variant: small-caps;
   margin-top: 10.5px;
   font-weight: normal;
@@ -55,6 +55,7 @@ header {
 }
 
 .switches{
+  cursor: pointer;
   background-color: var(--main-light-gray-color);
   border: solid;
   border-color: var(--more-light-gray-color);
@@ -68,15 +69,15 @@ header {
   text-align: center;
 }
 
-.controlPanel {
+.control-panel {
   float: right;
 }
 
-.controlPanel input[type=checkbox]{
+.control-panel input[type=checkbox]{
   display: none;
 }
 
-.controlPanel input[type=checkbox]:checked + .switches{
+.control-panel input[type=checkbox]:checked + .switches{
   background-color: var(--main-dark-gray-color);
   border-color: var(--more-dark-gray-color);
 }
@@ -86,7 +87,7 @@ header {
 */
 main {
   flex-grow: 1;
-  background: #fff;
+  background: white;
   position: relative;
 }
 
@@ -96,64 +97,86 @@ main {
   bottom: 0;
   left:0;
   right:0;
-  background: #fff;
+  background: white;
   padding: 13px 1px 0 19px;
   border-left: 2px dashed var(--main-light-gray-color);
   border-right: 2px dashed var(--main-light-gray-color);
 }
 
-#scrollGag {
+#scroll-gag {
   position: absolute;
   top: 0;
   bottom: 0;
   right:0;
-  background: #fff;
+  background: white;
   margin-right: 1px;
   width: 18px;
 }
 
-#firstBoard {
+#first-board {
   position: absolute;
   top: 0;
   bottom: 0;
   left:0;
   right:0;
+  border-left: 2px dashed var(--main-light-gray-color);
+  border-right: 2px dashed var(--main-light-gray-color);
+  background: radial-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.2));
+
 }
 
-#secondBoard {
+#second-board {
   position: absolute;
   top: 0;
   bottom: 0;
   left:0;
   right:0;
   display: none;
+  border-left: 2px dashed var(--main-light-gray-color);
+  border-right: 2px dashed var(--main-light-gray-color);
+  background: radial-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.3));
 }
 
 /* Source: https://stackoverflow.com/questions/953918/how-to-align-a-div-to-the-middle-horizontally-width-of-the-page */
 .centralization {
   position: absolute;
-  width: 40vh;
-  height: 20vh;
-  top: 50%;
-  left: 50%;
-  margin: -10vh 0 0 -20vh;
+  left:0;
+  right:0;
+  top: 40%;
+  margin: auto;
   text-align: center;
-  color: black;
+  color: var(--more-dark-gray-color);
   font-variant: small-caps;
   font-weight: bolder;
-  font-size: 1em;
+  font-size: 100%;
 }
 
 .centralization img {
-    width: 15%;
-    height: auto;
+  width: 80px;
+}
+
+#copy-btn {
+  height: 65px;
+  background-color: white;
+  border: 3px solid var(--more-dark-gray-color);
+  padding: 15px 32px;
+  text-align: center;
+  display: inline-block;
+  font-size: 20px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+#small-size {
+  font-size: 70%;
+  margin: -5px 0 -10px 0;
 }
 
 /*
 * --- FOOTER ---
 */
 footer {
-  height: 30px;
+  height: 31px;
   width: 100%;
   background-color: var(--main-light-gray-color);
   z-index: 10;
@@ -165,23 +188,4 @@ footer p {
   font-weight: bold;
   text-align: center;
   color: var(--more-light-gray-color);
-}
-
-
-
-
-
-
-
-.button {
-  background-color: #555;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
 }
