@@ -19,6 +19,10 @@ function pressedSwitch() {
     replaceData(originData);
 }
 
+function pressedInfo() {
+  alert('Данная функция в разработке.');
+}
+
 /* Work with the first panel above the CKEditor */
 firstBoard.addEventListener('click', function() {
   CKEDITOR.instances.editor1.focus();
@@ -63,6 +67,8 @@ function replaceData(workingData) {
     workingData = workingData.replace(/margin\S+px; /gim, '');
     workingData = workingData.replace(/ margin\S+px/gim, '');
     workingData = workingData.replace(/ lang="RU"/gim, '');
+    //space paragraphs
+    //workingData = workingData.replace(/ <span\S+><\/span>/gim, ' <span\S+>&nbsp<\/span>');
   }
 
   function replaceMostFrequentSize() {

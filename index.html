@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>TLСonvertor</title>
+	<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
@@ -12,13 +13,25 @@
 				<div class="header-logo">TLConverter</div>
 				<div class="control-panel">
 					<input type="checkbox" onclick="pressedSwitch()" id="switch1" checked />
-				    <label class="switches" for="switch1">Size</label>
+				    <label class="elem switches" for="switch1">
+						<img src="images/outline-format_size-24px.svg" />
+						<p>Size</p>
+				    </label>
 				    <input type="checkbox" onclick="pressedSwitch()" id="switch2" checked />
-				    <label class="switches" for="switch2">Font</label>
+				    <label class="elem switches" for="switch2">
+				    	<img src="images/outline-font_download-24px.svg" />
+						<p>Font</p>
+				    </label>
 				    <input type="checkbox" id="switch3" />
-				    <label class="switches" for="switch3">Auto</label>
-				    <input type="checkbox" id="switch4" />
-				    <label class="switches" for="switch4">Info</label>
+				    <label class="elem switches" for="switch3">
+				    	<img src="images/outline-autorenew-24px.svg" />
+						<p>Auto</p>
+					</label>
+				    <input type="checkbox" onclick="pressedInfo()" id="info-btn" />
+				    <label class="elem" for="info-btn">
+				    	<img src="images/outline-help_outline-24px.svg" />
+						<p>Info</p>
+				    </label>
 				</div>
 			</div>
 		</header>
@@ -50,7 +63,7 @@
 				<div class="centralization">
 					<button id="copy-btn">Скопируйте</button>
 					<p id="small-size"><br />или</p>
-					<p><br />Втавьте<br />следующий<br />текст</p>
+					<p><br />Вставьте<br />следующий<br />текст</p>
 				</div>
 			</div>
 		</main>
