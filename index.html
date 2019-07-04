@@ -29,30 +29,16 @@
 				<script type="text/javascript">
 					CKEDITOR.replace( 'editor1', {
 						allowedContent: true,
+						startupFocus : true,
 						//https://notare-hw.de/_scripts/3rdparty/ckeditor/samples/old/datafiltering.html
-						toolbar: [],
+						toolbar: []
 					} );
+
 					CKEDITOR.instances.editor1.on( 'paste', function(evt) {
 						processHtmlCode(evt.data.dataValue);
 					} );
 	            </script>
 	            <div class="view" id="scrollGag"></div>		
-				<!--
-				<div class="navbar">
-				  <a href="#home">Home</a>
-				  <a href="#news">News</a>
-				  <div class="dropdown">
-				    <button class="dropbtn">More 
-				      <i class="fa fa-caret-down"></i>
-				    </button>
-				    <div class="dropdown-content">
-				      <a href="#">Link 1</a>
-				      <a href="#">Link 2</a>
-				      <a href="#">Link 3</a>
-				    </div>
-				  </div> 
-				</div>
-				-->
 			</div>
 			<div class="view" id="firstBoard">
 				<div class="centralization">

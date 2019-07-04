@@ -1,8 +1,11 @@
 'use strict';
 
 let originData;
+let firstBoard = document.getElementById('firstBoard');
+let secondBoard = document.getElementById('secondBoard');
 
 function processHtmlCode(evtData) {
+  firstBoard.style.display = "none";
   originData = evtData;
   // alert(''); bug with emty paste
   replaceData(evtData);
@@ -16,25 +19,22 @@ function pressedSwitch() {
 }
 
 /* Work with the first panel above the CKEditor */
-let firstBoard = document.getElementById('firstBoard');
 firstBoard.addEventListener('click', function() {
-  firstBoard.style.display = "none";
   CKEDITOR.instances.editor1.focus();
+  CKEDITOR.instances.editor1.setData('');
 } );
 
 /* Work with the second panel above the CKEditor */
-let secondBoard = document.getElementById('secondBoard');
 secondBoard.addEventListener('click', function() {
   let testBtn = document.getElementById('test');
   if (isHover(testBtn) === true) {
     copyStringToClipboard(CKEDITOR.instances.editor1.getData());
   } else {
     secondBoard.style.display = "none";
+    CKEDITOR.instances.editor1.setMode('wysiwyg');
+    CKEDITOR.instances.editor1.focus(); 
     CKEDITOR.instances.editor1.setData('');
-    /* It is this strange because of a bug with focus */
-    CKEDITOR.instances.editor1.setMode('wysiwyg', function() {
-      CKEDITOR.instances.editor1.focus(); 
-    } );
+    firstBoard.style.display = "block";
   }
 } );
 
