@@ -3,6 +3,7 @@
 let originData;
 let firstBoard = document.getElementById('first-board');
 let secondBoard = document.getElementById('second-board');
+let copyBtn = document.getElementById('copy-btn');
 
 function processHtmlCode(evtData) {
   firstBoard.style.display = "none";
@@ -26,8 +27,7 @@ firstBoard.addEventListener('click', function() {
 
 /* Work with the second panel above the CKEditor */
 secondBoard.addEventListener('click', function() {
-  let testBtn = document.getElementById('test');
-  if (isHover(testBtn) === true) {
+  if (isHover(copyBtn) === true) {
     copyStringToClipboard(CKEDITOR.instances.editor1.getData());
   } else {
     secondBoard.style.display = "none";
