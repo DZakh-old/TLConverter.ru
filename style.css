@@ -116,14 +116,24 @@ main {
   width: 18px;
 }
 
+#bg-circle {
+  background: white;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left:0;
+  right:0;
+  width: 238px;
+  height: 238px;
+  border-radius: 50%;
+}
+
 #first-board {
   position: absolute;
   top: 0;
   bottom: 0;
   left:0;
   right:0;
-  background-image: radial-gradient(white 125px, transparent 125px);
-
 }
 
 #second-board {
@@ -133,7 +143,6 @@ main {
   left:0;
   right:0;
   display: none;
-  background-image: radial-gradient(white 125px, transparent 125px);
 }
 
 /* Source: https://stackoverflow.com/questions/953918/how-to-align-a-div-to-the-middle-horizontally-width-of-the-page */

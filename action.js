@@ -9,8 +9,11 @@ let numberOfParagraphs;
 function processHtmlCode(evtData) {
   firstBoard.style.display = "none";
   originData = evtData;
-  numberOfParagraphs = evtData.match(/<[ph][\d\s>]/gim).length;
-  // alert(''); bug with emty paste
+  if (evtData.match(/<[ph][\d\s>]/gim) != null) {
+    numberOfParagraphs = evtData.match(/<[ph][\d\s>]/gim).length;
+  } else {
+    numberOfParagraphs = null;
+  }
   replaceData(evtData);
   CKEDITOR.instances.editor1.setMode('source');
   secondBoard.style.display = "block";
