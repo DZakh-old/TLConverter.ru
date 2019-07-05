@@ -59,6 +59,7 @@ function replaceData(workingData) {
     replaceMostFrequentSize();
   if (document.getElementById("switch2").checked) 
     replaceMostFrequentFont();
+  replaceTrashSpans();
 
   if (document.getElementById("switch3").checked) 
     copyStringToClipboard(workingData);
@@ -76,8 +77,8 @@ function replaceData(workingData) {
   }
 
   function replaceMostFrequentSize() {
-    let regexForSerching = /(?<= style="font-size:)\S+(?=pt")/gim;
-    let arrayOfSizes = workingData.match(regexForSerching);
+    let regexForMatching = /(?<= style="font-size:)\S+(?=pt")/gim;
+    let arrayOfSizes = workingData.match(regexForMatching);
     if (arrayOfSizes != null) {
       let mode = getMode(arrayOfSizes);
       let regexForReplacing = RegExp(' style="font-size:' + mode + 'pt"', 'gim');
@@ -88,8 +89,8 @@ function replaceData(workingData) {
   }
 
   function replaceMostFrequentFont() {
-    let regexForSerching = /(?<= style="font-family:)\S+(?=")/gim;
-    let arrayOfSizes = workingData.match(regexForSerching);
+    let regexForMatching = /(?<= style="font-family:)\S+(?=")/gim;
+    let arrayOfSizes = workingData.match(regexForMatching);
     if (arrayOfSizes != null) {
       let mode = getMode(arrayOfSizes);
       let regexForReplacing = RegExp(' style="font-family:' + getMode(arrayOfSizes) + '"', 'gim');
@@ -98,6 +99,17 @@ function replaceData(workingData) {
         replaceMostFrequentFont();
     }
   } 
+
+  function replaceTrashSpans() {
+    workingData = workingData.replace(/(?<!<\/span>)<\/span>(?!<\/span)/gim, '');
+    workingData = workingData.replace(/<span>/gim, '');
+    let strSpan = '';
+    if (!document.getElementById("switch1").checked)
+      strSpan += '</span>';
+    if (!document.getElementById("switch2").checked) 
+      strSpan += '</span>';
+    workingData = workingData.replace(/(<\/span>)+/gim, strSpan);
+  }
 }
 
 // Source: https://techoverflow.net/2018/03/30/copying-strings-to-the-clipboard-using-pure-javascript/
