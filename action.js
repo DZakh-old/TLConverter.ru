@@ -101,21 +101,28 @@ function replaceData(workingData) {
   } 
 
   function replaceTrashSpans() {
-    workingData = workingData.replace(/(?<!<\/span>)<\/span>(?!<\/span)/gim, '');
+    let currentPosition = -1;
+    let interimPosition;
+    let closingPosition;
+    let edgePosition;
+    const lenghtOfClosingSpan = 7;
+    
+    while ((currentPosition = workingData.indexOf("<span>", ++currentPosition)) != -1) {
+      edgePosition = closingPosition = workingData.indexOf("</span>", currentPosition);
+      interimPosition = currentPosition;
+      while ((interimPosition = workingData.indexOf("<span>", ++interimPosition)) != -1 && interimPosition < edgePosition) {
+        closingPosition = workingData.indexOf("</span>", ++closingPosition);
+      }
+      workingData = workingData.slice(0, closingPosition) + workingData.slice(closingPosition + lenghtOfClosingSpan);
+    }
     workingData = workingData.replace(/<span>/gim, '');
-    let strSpan = '';
-    if (!document.getElementById("switch1").checked)
-      strSpan += '</span>';
-    if (!document.getElementById("switch2").checked) 
-      strSpan += '</span>';
-    workingData = workingData.replace(/(<\/span>)+/gim, strSpan);
   }
 }
 
 // Source: https://techoverflow.net/2018/03/30/copying-strings-to-the-clipboard-using-pure-javascript/
 function copyStringToClipboard (str) {
   // Create new element
-  var el = document.createElement('textarea');
+  let el = document.createElement('textarea');
   // Set value (string to be copied)
   el.value = str;
   // Set non-editable to avoid focus and move outside of view
