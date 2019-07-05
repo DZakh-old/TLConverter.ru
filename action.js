@@ -73,6 +73,8 @@ function replaceData(workingData) {
     workingData = workingData.replace(/margin\S+px; /gim, '');
     workingData = workingData.replace(/ margin\S+px/gim, '');
     workingData = workingData.replace(/ lang="RU"/gim, '');
+    workingData = workingData.replace(/ style="font-family:&quot;Tahoma&quot;,sans-serif"/gim, '');
+    workingData = workingData.replace(/ style="font-family:&quot;MS Gothic&quot;"/gim, '');
     workingData = workingData.replace(/(?<=\W)><\/span>(?=<\/span>)/gim, '>&nbsp;</span>');
   }
 
