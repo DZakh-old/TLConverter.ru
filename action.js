@@ -6,12 +6,17 @@ let secondBoard = document.getElementById('second-board');
 let copyBtn = document.getElementById('copy-btn');
 
 function performPasting(evtData) {
-  originData = evtData;
+  originData = getFixedData(evtData);
   evtData = '';
   processHtml(originData);
   CKEDITOR.instances.editor1.setMode('source');
   firstBoard.style.display = "none";
   secondBoard.style.display = "block";
+}
+
+function getFixedData(data) {
+  alert("Изображения не поддерживаются в текущей версии. Они автоматически удалены.");
+  return data.replace(/<img src="\S*" \S* \S* \/>/gim, '');
 }
 
 function pressedSwitch() {
