@@ -4,12 +4,11 @@ let originData;
 let firstBoard = document.getElementById('first-board');
 let secondBoard = document.getElementById('second-board');
 let copyBtn = document.getElementById('copy-btn');
-let numOfParagraphs;
 
 function performPasting(evtData) {
   originData = evtData;
-  numOfParagraphs = getNumOfParagraphs(evtData);
-  processHtml(evtData);
+  evtData = '';
+  processHtml(originData);
   CKEDITOR.instances.editor1.setMode('source');
   firstBoard.style.display = "none";
   secondBoard.style.display = "block";
@@ -35,6 +34,7 @@ secondBoard.addEventListener('click', function() {
   if (isHover(copyBtn) === true) {
     copyStringToClipboard(CKEDITOR.instances.editor1.getData());
   } else {
+    originData = '';
     CKEDITOR.instances.editor1.setData('');
     /* It is this strange because of a bug with focus */
     CKEDITOR.instances.editor1.setMode('wysiwyg', function() {
@@ -50,6 +50,8 @@ function isHover(element) {
 }
 
 function processHtml(workingData) {
+  let numOfParagraphs = getNumOfParagraphs(workingData);
+
   replaceEssentialStuff();
   if (document.getElementById("switch1").checked) 
     replaceMostFrequentSize();
@@ -71,7 +73,7 @@ function processHtml(workingData) {
     workingData = workingData.replace(/margin\S+px; /gim, '');
     workingData = workingData.replace(/ margin\S+px/gim, '');
     workingData = workingData.replace(/ lang="\w*"/gim, '');
-    workingData = workingData.replace(/(?<=[\W\D])><\/span>(?=<\/span>)/gim, '>&nbsp;</span>');
+    workingData = workingData.replace(/(?<=[\W])><\/span>(?=<\/span>)/gim, '>&nbsp;</span>');
   }
 
   function replaceMostFrequentSize() {
@@ -79,10 +81,11 @@ function processHtml(workingData) {
     let arrayOfSizes = workingData.match(regexForMatching);
 
     if (arrayOfSizes != null) {
-      let mode = getMode(arrayOfSizes);
-      let regexForReplacing = RegExp(' style="font-size:' + getMode(arrayOfSizes) + 'pt"', 'gim');
+      const {mode, numOfMode, numOf2ndMode} = getModeValues(arrayOfSizes);
+      let regexForReplacing = RegExp(' style="font-size:' + mode + 'pt"', 'gim');
+
       workingData = workingData.replace(regexForReplacing, '');
-      if (numOfParagraphs == getNumOfMode(arrayOfSizes, mode))
+      if (numOfMode == numOfParagraphs || numOfMode == numOf2ndMode)
         replaceMostFrequentSize();
     }
   }
@@ -92,10 +95,11 @@ function processHtml(workingData) {
     let arrayOfSizes = workingData.match(regexForMatching);
 
     if (arrayOfSizes != null) {
-      let mode = getMode(arrayOfSizes);
-      let regexForReplacing = RegExp(' style="font-family:' + getMode(arrayOfSizes) + '"', 'gim');
+      const {mode, numOfMode, numOf2ndMode} = getModeValues(arrayOfSizes);
+      let regexForReplacing = RegExp(' style="font-family:' + mode + '"', 'gim');
+
       workingData = workingData.replace(regexForReplacing, '');
-      if (numOfParagraphs == getNumOfMode(arrayOfSizes, mode))
+      if (numOfMode == numOf2ndMode)
         replaceMostFrequentFont();
     }
   } 
@@ -141,11 +145,10 @@ function copyStringToClipboard(str) {
 }
 
 // Source: https://stackoverflow.com/questions/1053843/get-the-element-with-the-highest-occurrence-in-an-array
-function getMode(array) {
-  if (array.length == 0)
-    return null;
+function getModeValues(array) {
   let modeMap = {};
   let maxEl = array[0], maxCount = 1;
+  let secondMaxEl;
   for (let i = 0; i < array.length; i++) {
     let el = array[i];
     if(modeMap[el] == null) {
@@ -154,19 +157,16 @@ function getMode(array) {
       modeMap[el]++;
     }
     if (modeMap[el] > maxCount) {
+      secondMaxEl = maxEl;
       maxEl = el;
       maxCount = modeMap[el];
     }
   }
-  return maxEl;
-}
-
-function getNumOfMode(array, mode) {
-  let count = 0;
-  for (let i = 0; i < array.length + 1; i++)
-    if (array[i] == mode)
-      count++;
-  return count;
+  return {
+    mode: maxEl,
+    numOfMode: modeMap[maxEl],
+    numOf2ndMode: modeMap[secondMaxEl],
+  };
 }
 
 function getNumOfParagraphs(str) {
