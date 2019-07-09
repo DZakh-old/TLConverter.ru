@@ -4,24 +4,20 @@ let originData;
 let firstBoard = document.getElementById('first-board');
 let secondBoard = document.getElementById('second-board');
 let copyBtn = document.getElementById('copy-btn');
-let numberOfParagraphs;
+let numOfParagraphs;
 
-function processHtmlCode(evtData) {
-  firstBoard.style.display = "none";
+function performPasting(evtData) {
   originData = evtData;
-  if (evtData.match(/<[ph][\d\s>]/gim) != null) {
-    numberOfParagraphs = evtData.match(/<[ph][\d\s>]/gim).length;
-  } else {
-    numberOfParagraphs = null;
-  }
-  replaceData(evtData);
+  numOfParagraphs = getNumOfParagraphs(evtData);
+  processHtml(evtData);
   CKEDITOR.instances.editor1.setMode('source');
+  firstBoard.style.display = "none";
   secondBoard.style.display = "block";
 }
 
 function pressedSwitch() {
   if (CKEDITOR.instances.editor1.mode === 'source')
-    replaceData(originData);
+    processHtml(originData);
 }
 
 function pressedInfo() {
@@ -39,12 +35,12 @@ secondBoard.addEventListener('click', function() {
   if (isHover(copyBtn) === true) {
     copyStringToClipboard(CKEDITOR.instances.editor1.getData());
   } else {
-    secondBoard.style.display = "none";
     CKEDITOR.instances.editor1.setData('');
     /* It is this strange because of a bug with focus */
     CKEDITOR.instances.editor1.setMode('wysiwyg', function() {
       CKEDITOR.instances.editor1.focus(); 
     } );
+    secondBoard.style.display = "none";
     firstBoard.style.display = "block";
   }
 } );
@@ -53,7 +49,7 @@ function isHover(element) {
   return (element.parentElement.querySelector(':hover') === element);
 }
 
-function replaceData(workingData) {
+function processHtml(workingData) {
   replaceEssentialStuff();
   if (document.getElementById("switch1").checked) 
     replaceMostFrequentSize();
@@ -68,51 +64,56 @@ function replaceData(workingData) {
 
   function replaceEssentialStuff() {
     workingData = workingData.replace(/&quot;Courier New&quot;/gim, 'Courier');
+    workingData = workingData.replace(/ style="font-family:&quot;Tahoma&quot;,sans-serif"/gim, '');
+    workingData = workingData.replace(/ style="font-family:&quot;MS Gothic&quot;"/gim, '');
     workingData = workingData.replace(/ style="color:black"/gim, '');
     workingData = workingData.replace(/ style="background:white"/gim, '');
     workingData = workingData.replace(/margin\S+px; /gim, '');
     workingData = workingData.replace(/ margin\S+px/gim, '');
-    workingData = workingData.replace(/ lang="RU"/gim, '');
-    workingData = workingData.replace(/ style="font-family:&quot;Tahoma&quot;,sans-serif"/gim, '');
-    workingData = workingData.replace(/ style="font-family:&quot;MS Gothic&quot;"/gim, '');
-    workingData = workingData.replace(/(?<=\W)><\/span>(?=<\/span>)/gim, '>&nbsp;</span>');
+    workingData = workingData.replace(/ lang="\w*"/gim, '');
+    workingData = workingData.replace(/(?<=[\W\D])><\/span>(?=<\/span>)/gim, '>&nbsp;</span>');
   }
 
   function replaceMostFrequentSize() {
     let regexForMatching = /(?<= style="font-size:)\S+(?=pt")/gim;
     let arrayOfSizes = workingData.match(regexForMatching);
+
     if (arrayOfSizes != null) {
       let mode = getMode(arrayOfSizes);
-      let regexForReplacing = RegExp(' style="font-size:' + mode + 'pt"', 'gim');
+      let regexForReplacing = RegExp(' style="font-size:' + getMode(arrayOfSizes) + 'pt"', 'gim');
       workingData = workingData.replace(regexForReplacing, '');
-      if (numberOfParagraphs == getNumOfMode(arrayOfSizes, mode))
+      if (numOfParagraphs == getNumOfMode(arrayOfSizes, mode))
         replaceMostFrequentSize();
     }
   }
 
   function replaceMostFrequentFont() {
-    let regexForMatching = /(?<= style="font-family:)\S+(?=")/gim;
+    let regexForMatching = /(?<= style="font-family:)[^<">]+(?=")/gim;
     let arrayOfSizes = workingData.match(regexForMatching);
+
     if (arrayOfSizes != null) {
       let mode = getMode(arrayOfSizes);
       let regexForReplacing = RegExp(' style="font-family:' + getMode(arrayOfSizes) + '"', 'gim');
       workingData = workingData.replace(regexForReplacing, '');
-      if (numberOfParagraphs == getNumOfMode(arrayOfSizes, mode))
+      if (numOfParagraphs == getNumOfMode(arrayOfSizes, mode))
         replaceMostFrequentFont();
     }
   } 
 
   function replaceTrashSpans() {
+    // The position of current "<span>"
     let currentPosition = -1;
-    let interimPosition;
+    // The position that's moving from the first position of "</span>" that's bigger than currentPosition
+    //   to possition of closing tag for currentPosition tag "<span>"
     let closingPosition;
-    let edgePosition;
+    // The interim position for checking "<span " after the currentPosition and before the edgePosition 
+    let interimPosition;
     const lenghtOfClosingSpan = 7;
     
     while ((currentPosition = workingData.indexOf("<span>", ++currentPosition)) != -1) {
-      edgePosition = closingPosition = workingData.indexOf("</span>", currentPosition);
+      closingPosition = workingData.indexOf("</span>", currentPosition);
       interimPosition = currentPosition;
-      while ((interimPosition = workingData.indexOf("<span>", ++interimPosition)) != -1 && interimPosition < edgePosition) {
+      while ((interimPosition = workingData.indexOf("<span", ++interimPosition)) != -1 && interimPosition < closingPosition) {
         closingPosition = workingData.indexOf("</span>", ++closingPosition);
       }
       workingData = workingData.slice(0, closingPosition) + workingData.slice(closingPosition + lenghtOfClosingSpan);
@@ -122,7 +123,7 @@ function replaceData(workingData) {
 }
 
 // Source: https://techoverflow.net/2018/03/30/copying-strings-to-the-clipboard-using-pure-javascript/
-function copyStringToClipboard (str) {
+function copyStringToClipboard(str) {
   // Create new element
   let el = document.createElement('textarea');
   // Set value (string to be copied)
@@ -162,12 +163,16 @@ function getMode(array) {
 
 function getNumOfMode(array, mode) {
   let count = 0;
-  for (let i = 0; i < array.length + 1; i++) {
-    if (array[i] == mode) {
+  for (let i = 0; i < array.length + 1; i++)
+    if (array[i] == mode)
       count++;
-    }
-  }
   return count;
+}
+
+function getNumOfParagraphs(str) {
+  if (str.match(/<[ph][\d\s>]/gim) != null)
+    return str.match(/<[ph][\d\s>]/gim).length;
+  return null;
 }
 
 

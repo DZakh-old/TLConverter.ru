@@ -9,7 +9,7 @@ CKEDITOR.editorConfig = function( config ) {
 	config.resize_enabled = false;
 	config.language = 'ru';
 	config.uiColor = '#ffffff';
-	config.height = '90vh';
+	config.height = '88vh';
 	config.toolbarLocation = 'bottom';
 	config.startupMode = 'wysiwyg';
 };
