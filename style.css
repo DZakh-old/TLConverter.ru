@@ -116,6 +116,9 @@ main {
   width: 18px;
 }
 
+/*
+* --- NOTIFICATIONS ---
+*/
 #bg-circle {
   background: white;
   position: absolute;
@@ -178,7 +181,7 @@ main {
   border: 4px solid var(--more-dark-gray-color);
 }
 
-#small-size {
+#small-size-text {
   font-size: 70%;
   margin: -5px 0 -10px 0;
 }
