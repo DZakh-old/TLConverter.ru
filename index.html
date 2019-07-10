@@ -1,24 +1,37 @@
 <!DOCTYPE html>
-<html lang="ru">	<!-- Maybe add smth additional -->
+<html lang="ru">
 <head>
 	<meta charset="UTF-8">
 	<title>TLСonvertor</title>
+	<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
 	<div class="wrapper">
 		<header>
 			<div class="view">
-				<div class="headerLogo">TLConverter</div>
-				<div class="controlPanel">
-					<input type="checkbox" onclick="pressedSwitch()" id="switch1" checked />
-				    <label class="switches" for="switch1">Size</label>
-				    <input type="checkbox" onclick="pressedSwitch()" id="switch2" checked />
-				    <label class="switches" for="switch2">Font</label>
-				    <input type="checkbox" id="switch3" />
-				    <label class="switches" for="switch3">Auto</label>
-				    <input type="checkbox" id="switch4" />
-				    <label class="switches" for="switch4">Info</label>
+				<div class="header-logo">TLC<span>onverter</span></div>
+				<div class="control-panel">
+					<input type="checkbox" onclick="pressedSwitch()" id="switch-size" checked />
+				    <label class="elem switches" for="switch-size">
+						<img src="images/outline-format_size-24px.svg" />
+						<p>Size</p>
+				    </label>
+				    <input type="checkbox" onclick="pressedSwitch()" id="switch-font" checked />
+				    <label class="elem switches" for="switch-font">
+				    	<img src="images/outline-font_download-24px.svg" />
+						<p>Font</p>
+				    </label>
+				    <input type="checkbox" id="switch-auto" />
+				    <label class="elem switches" for="switch-auto">
+				    	<img src="images/outline-autorenew-24px.svg" />
+						<p>Auto</p>
+					</label>
+				    <input type="checkbox" onclick="pressedInfo()" id="info-btn" />
+				    <label class="elem" for="info-btn">
+				    	<img src="images/outline-help_outline-24px.svg" />
+						<p>Info</p>
+				    </label>
 				</div>
 			</div>
 		</header>
@@ -29,44 +42,28 @@
 				<script type="text/javascript">
 					CKEDITOR.replace( 'editor1', {
 						allowedContent: true,
+						startupFocus : true,
 						//https://notare-hw.de/_scripts/3rdparty/ckeditor/samples/old/datafiltering.html
-						toolbar: [],
+						toolbar: []
 					} );
-					CKEDITOR.instances.editor1.on( 'paste', function(evt) {
-						processHtmlCode(evt.data.dataValue);
+					CKEDITOR.instances.editor1.on( 'paste', function (evt) {
+						performPasting(evt.data.dataValue);
 					} );
 	            </script>
-	            <div>
-	            	<!-- Move to the right above the scrollbar -->
-	            </div>		
-				<!--
-				<div class="navbar">
-				  <a href="#home">Home</a>
-				  <a href="#news">News</a>
-				  <div class="dropdown">
-				    <button class="dropbtn">More 
-				      <i class="fa fa-caret-down"></i>
-				    </button>
-				    <div class="dropdown-content">
-				      <a href="#">Link 1</a>
-				      <a href="#">Link 2</a>
-				      <a href="#">Link 3</a>
-				    </div>
-				  </div> 
-				</div>
-				-->
+	            <div class="view" id="scroll-gag"></div>		
 			</div>
-			<div class="view" id="firstBoard">
+			<div class="view" id="bg-circle"></div>
+			<div class="view" id="first-board">
 				<div class="centralization">
 					<img src="images/paste-from-clipboard.svg" />
-					<p>Вставьте текст</p>
+					<p><br />Вставьте текст</p>
 				</div>
 			</div>
-			<div class="view" id="secondBoard" >
+			<div class="view" id="second-board" >
 				<div class="centralization">
-					<button class="button" id="test">Button</button>
-					<p>или</p>
-					<p>втавьте новый текст</p>
+					<button id="copy-btn">Скопируйте</button>
+					<p id="small-size-text"><br />или</p>
+					<p><br />Вставьте<br />следующий<br />текст</p>
 				</div>
 			</div>
 		</main>

@@ -4,13 +4,12 @@
  */
 
 CKEDITOR.editorConfig = function( config ) {
-	//config.extraPlugins = 'autogrow';
 	config.extraPlugins = 'pasteFromGoogleDoc';
 	config.removePlugins = "toolbar,elementspath";
 	config.resize_enabled = false;
 	config.language = 'ru';
 	config.uiColor = '#ffffff';
-	config.height = '80vh';
+	config.height = '88vh';
 	config.toolbarLocation = 'bottom';
 	config.startupMode = 'wysiwyg';
 };

@@ -1,6 +1,8 @@
 :root {
+  --more-dark-gray-color: #131315;
   --main-dark-gray-color: #202124;
-  --main-light-gray-color: #323639; 
+  --main-light-gray-color: #323639;
+  --more-light-gray-color: #41464a;
 }
 
 * {
@@ -10,9 +12,10 @@
 }
 
 body {
-  font-family: Areal, sans-serif;
+  font-family: 'Roboto', 'Areal', sans-serif;
+  font-variant: small-caps;
   overflow: hidden;
-  user-select: none; /* Works only in Chrome */
+  user-select: none; /* Chrome */
   color: #fff;
 }
 
@@ -21,14 +24,14 @@ body {
 */
 .wrapper {
   display: flex;
-  flex-direction: column;
+  flex-direction: column; 
   min-height: 100vh;
   max-height: 100vh;
 }
 
 .view {
-  width: 60%;
-  max-width: 21cm;
+  width: 98%;
+  max-width: 660px;
   margin: auto;
 }
 
@@ -36,42 +39,50 @@ body {
 * --- HEADER ---
 */
 header {
+  z-index: 13;
   width: 100%;
   background-color: var(--main-light-gray-color);
   display: flex;
-  height: 70px
+  height: 70px;
 }
 
-.headerLogo {
-  font-variant: small-caps;
-  margin-top: 10.5px;
-  font-weight: normal;
-  font-size: 2.5em;
-  float: left;
-  /*cursor: pointer;*/
+.header-logo {
+  margin: 15px 11px 0 11px;
+  font-size: 37px;
+  float: left; 
 }
 
-.switches{
-  background-color: var(--main-light-gray-color);
-  border: 1px solid var(--main-dark-gray-color);
-  border-bottom: none;
-  box-sizing: border-box;
+.elem {
+  padding-top: 8px;
+  font-size: 10px;
+  cursor: pointer;
   display: inline-block;
-  margin-top: 6px;
-  width: 64px;
-  height: 64px;
+  margin-top: 16px;
+  width: 54px;
+  height: 54px;
+  text-align: center;
 }
 
-.controlPanel {
+.switches {
+  background-color: var(--main-light-gray-color);
+  border: solid;
+  border-color: var(--more-light-gray-color);
+  border-width: 2px 1px 0 1px;
+  border-radius: 30px 30px 0 0 / 15px 15px 0 0;
+  box-sizing: border-box;
+}
+
+.control-panel {
   float: right;
 }
 
-.controlPanel input[type=checkbox]{
+.control-panel input[type=checkbox]{
   display: none;
 }
 
-.controlPanel input[type=checkbox]:checked + .switches{
+.control-panel input[type=checkbox]:checked + .switches{
   background-color: var(--main-dark-gray-color);
+  border-color: var(--more-dark-gray-color);
 }
 
 /*
@@ -79,7 +90,7 @@ header {
 */
 main {
   flex-grow: 1;
-  background: #fff;
+  background: white;
   position: relative;
 }
 
@@ -89,223 +100,133 @@ main {
   bottom: 0;
   left:0;
   right:0;
-  background: #fff;
-  padding: 1px;
+  background: white;
+  padding: 13px 1px 0 19px;
   border-left: 2px dashed var(--main-light-gray-color);
   border-right: 2px dashed var(--main-light-gray-color);
 }
 
-#firstBoard {
+#scroll-gag {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right:0;
+  background: white;
+  margin-right: 1px;
+  width: 18px;
+}
+
+/*
+* --- NOTIFICATIONS ---
+*/
+#bg-circle {
+  background: white;
   position: absolute;
   top: 0;
   bottom: 0;
   left:0;
   right:0;
-  background: rgba(0,0,0,0.1); /*delete*/
+  width: 238px;
+  height: 238px;
+  border-radius: 50%;
 }
 
-#secondBoard {
+#first-board {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left:0;
+  right:0;
+}
+
+#second-board {
   position: absolute;
   top: 0;
   bottom: 0;
   left:0;
   right:0;
   display: none;
-  background: rgba(0,0,0,0.5); /*delete*/
+}
+
+/* Source: https://stackoverflow.com/questions/953918/how-to-align-a-div-to-the-middle-horizontally-width-of-the-page */
+.centralization {
+  position: absolute;
+  left:0;
+  right:0;
+  top: 41%;
+  margin: auto;
+  text-align: center;
+  color: var(--more-dark-gray-color);
+  font-weight: bolder;
+  font-size: 100%;
+}
+
+.centralization img {
+  width: 80px;
+}
+
+#copy-btn {
+  height: 65px;
+  background-color: white;
+  border: 3px solid var(--more-dark-gray-color);
+  padding: 15px 32px;
+  text-align: center;
+  display: inline-block;
+  font-size: 20px;
+  margin: 4px;
+  cursor: pointer;
+}
+
+#copy-btn:hover {
+  border: 4px solid var(--more-dark-gray-color);
+}
+
+#small-size-text {
+  font-size: 70%;
+  margin: -5px 0 -10px 0;
 }
 
 /*
 * --- FOOTER ---
 */
 footer {
-  height: 30px;
+  height: 31px;
   width: 100%;
   background-color: var(--main-light-gray-color);
+  z-index: 10;
 }
 
-
-
-
-
+footer p {
+  margin-top: 8px;
+  font-size: 8pt;
+  font-variant: normal;
+  font-weight: bold;
+  text-align: center;
+  color: var(--more-light-gray-color);
+}
 
 /*
-	look at the link to create a css:
-	https://www.w3schools.com/howto/tryit.asp?filename=tryhow_js_copy_clipboard2
+* --- FLEX ---
 */
-/* Navbar container */
-.navbar {
-  overflow: hidden;
-  background-color: #333;
-  font-family: Arial;
-  float: bottom;
+@media (min-width: 321px) and (max-width: 451px) {
+  .header-logo span {
+    display: none;
+  }
 }
 
-/* Links inside the navbar */
-.navbar a {
-  float: left;
-  font-size: 16px;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
+@media (min-width: 245px) and (max-width: 320px) {
+  header {
+    height: 129.5px;
+  }
+
+  .header-logo {
+    font-size: 37px;
+    float: none;
+    text-align: center;
+  }
+  
+  .control-panel {
+    margin-left: 1px;
+    margin-right: 10px;
+  }
 }
-
-/* The dropdown container */
-.dropdown {
-  float: left;
-  overflow: hidden;
-}
-
-/* Dropdown button */
-.dropdown .dropbtn {
-  font-size: 16px; 
-  border: none;
-  outline: none;
-  color: white;
-  padding: 14px 16px;
-  background-color: inherit;
-  font-family: inherit; /* Important for vertical align on mobile phones */
-  margin: 0; /* Important for vertical align on mobile phones */
-}
-
-/* Add a red background color to navbar links on hover */
-.navbar a:hover, .dropdown:hover .dropbtn {
-  background-color: red;
-}
-
-/* Dropdown content (hidden by default) */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
-  float: none;
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
-
-/* Add a grey background color to dropdown links on hover */
-.dropdown-content a:hover {
-  background-color: #ddd;
-}
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-  display: block;
-}/* Navbar container */
-.navbar {
-  overflow: hidden;
-  background-color: #333;
-  font-family: Arial;
-}
-
-/* Links inside the navbar */
-.navbar a {
-  float: left;
-  font-size: 16px;
-  color: white;
-  text-align: center;
-  padding: 14px 16px;
-  text-decoration: none;
-}
-
-/* The dropdown container */
-.dropdown {
-  float: left;
-  overflow: hidden;
-}
-
-/* Dropdown button */
-.dropdown .dropbtn {
-  font-size: 16px; 
-  border: none;
-  outline: none;
-  color: white;
-  padding: 14px 16px;
-  background-color: inherit;
-  font-family: inherit; /* Important for vertical align on mobile phones */
-  margin: 0; /* Important for vertical align on mobile phones */
-}
-
-/* Add a red background color to navbar links on hover */
-.navbar a:hover, .dropdown:hover .dropbtn {
-  background-color: red;
-}
-
-/* Dropdown content (hidden by default) */
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
-  float: none;
-  color: black;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-  text-align: left;
-}
-
-/* Add a grey background color to dropdown links on hover */
-.dropdown-content a:hover {
-  background-color: #ddd;
-}
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-
-
-
-.button {
-  background-color: #555;
-  border: none;
-  color: white;
-  padding: 15px 32px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-}
-
-/* Source: https://stackoverflow.com/questions/953918/how-to-align-a-div-to-the-middle-horizontally-width-of-the-page */
-.centralization {
-  position: absolute;
-  width: 20vh;
-  height: 20vh;
-  top: 50%;
-  left: 50%;
-  margin: -10vh 0 0 -10vh;
-  text-align: center;
-  color: black;
-  font-variant: small-caps;
-  font-weight: bolder;
-  font-size: 1em;
-}
-
-.centralization img {
-    width: 60%;
-    height: auto;
-}
-
-
- 
