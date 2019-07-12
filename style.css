@@ -15,8 +15,12 @@ body {
   font-family: 'Roboto', 'Areal', sans-serif;
   font-variant: small-caps;
   overflow: hidden;
-  user-select: none; /* Chrome */
   color: #fff;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
 }
 
 /* 
@@ -148,7 +152,6 @@ main {
   display: none;
 }
 
-/* Source: https://stackoverflow.com/questions/953918/how-to-align-a-div-to-the-middle-horizontally-width-of-the-page */
 .centralization {
   position: absolute;
   left:0;
