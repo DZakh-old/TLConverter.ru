@@ -88,6 +88,7 @@ function processHtml(workingData) {
 
     if (arrayOfSizes != null) {
       const {mode, numOfMode, numOf2ndMode} = getModeValues(arrayOfSizes);
+      //if (isNumber(mode))
       const switchChecked = document.getElementById("switch-size").checked;
       let regexForReplacing = RegExp(' style="font-size:' + mode + 'pt"', 'gim');
 
@@ -108,7 +109,7 @@ function processHtml(workingData) {
       let regexForReplacing = RegExp(' style="font-family:' + mode + '"', 'gim');
       if (switchChecked || numOfMode == numOfParagraphs && !switchChecked)
         workingData = workingData.replace(regexForReplacing, '');
-      if (numOfMode == numOf2ndMode)
+      if (numOfMode == numOfParagraphs || numOfMode == numOf2ndMode)
         replaceMostFrequentFont();
     }
   } 
@@ -225,6 +226,8 @@ https://techoverflow.net/2018/03/30/copying-strings-to-the-clipboard-using-pure-
 Possible function:
 https://www.w3schools.com/js/js_htmldom_eventlistener.how-to-build-a-full-screen-responsive-page-with-flexbox--cms-32086
 https://stackoverflow.com/questions/2010335/ckeditor-onpaste-event
+
+https://jscompress.com/
 */
 
 

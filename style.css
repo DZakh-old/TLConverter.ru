@@ -94,8 +94,19 @@ header {
 */
 main {
   flex-grow: 1;
-  background: white;
   position: relative;
+  display: flex;
+  flex-direction:row;
+}
+
+.column {
+  flex-grow: 1;
+}
+
+.working-zone {
+  position: absolute;
+  top: 0;
+  bottom: 0;
 }
 
 #textarea {
@@ -104,7 +115,6 @@ main {
   bottom: 0;
   left:0;
   right:0;
-  background: white;
   padding: 13px 1px 0 19px;
   border-left: 2px dashed var(--main-light-gray-color);
   border-right: 2px dashed var(--main-light-gray-color);
@@ -123,18 +133,6 @@ main {
 /*
 * --- NOTIFICATIONS ---
 */
-#bg-circle {
-  background: white;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left:0;
-  right:0;
-  width: 238px;
-  height: 238px;
-  border-radius: 50%;
-}
-
 #first-board {
   position: absolute;
   top: 0;
@@ -152,36 +150,48 @@ main {
   display: none;
 }
 
-.centralization {
+.central-circle {
+  background: pink;
   position: absolute;
+  top: 0;
+  bottom: 0;
   left:0;
   right:0;
-  top: 41%;
   margin: auto;
+  width: 230px;
+  height: 230px;
+  border-radius: 50%;
   text-align: center;
   color: var(--more-dark-gray-color);
-  font-weight: bolder;
-  font-size: 100%;
+  padding-top: 50px;
 }
 
-.centralization img {
-  width: 80px;
+.central-circle img {
+  margin-top: 13px;
+  width: 64px;
 }
 
 #copy-btn {
+  background: white;
   height: 65px;
-  background-color: white;
   border: 3px solid var(--more-dark-gray-color);
-  padding: 15px 32px;
+  padding: 15px 28px;
   text-align: center;
   display: inline-block;
   font-size: 20px;
   margin: 4px;
   cursor: pointer;
+  font-weight: bolder;
 }
 
 #copy-btn:hover {
-  border: 4px solid var(--more-dark-gray-color);
+  border-color: var(--more-light-gray-color);
+  background: var(--more-light-gray-color);
+  color: white;
+}
+
+#copy-btn:active {
+    padding: 16px 28px 14px 28px;
 }
 
 #small-size-text {
