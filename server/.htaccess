@@ -1,3 +1,3 @@
-### begin Sprinthost-redirects 14.07.2019 22:31
-Redirect 301 / http://a0318870.xsph.ru
-### Sprinthost-redirects end
+RewriteEngine on
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301,NE]

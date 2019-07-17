@@ -1,16 +1,27 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-	<meta name="google-site-verification" content="Wpef2Ra74NzKeVkWOCUjOYb4m8Vj8VTTMUds4x_7Jpg" />
+	<!-- Global site tag (gtag.js) - Google Analytics -->
+	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-144010670-1"></script>
+	<script>
+	  window.dataLayer = window.dataLayer || [];
+	  function gtag(){dataLayer.push(arguments);}
+	  gtag('js', new Date());
+
+	  gtag('config', 'UA-144010670-1');
+	</script>
+
+	<meta name="google-site-verification" content="9Wym74xcdwjB6w6uPpwXrgIdMLlhgKsWNdybvfaCuFs" />
 	<meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="Description" content="Created by dmirdDZ, converter for word into html, tl.rulate, конвертер для рулета">
   <meta name="keywords" content="TLConverter, конвертация текста, получить сырой код из ворда">
   <meta name="theme-color" content="#323639"/>
 	<title>TLСonvertor</title>
-	<link rel="stylesheet" href="style.css">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
 	<link rel="icon" href="images/site-icon.ico">
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/media.css">
 </head>
 <body>
 	<div class="wrapper">
@@ -47,7 +58,7 @@
 				<div class="working-zone view">		
 					<div id="textarea">
 						<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
-						<textarea name="editor1" id="editor1" cols="30" rows="10"></textarea>	
+						<textarea name="editor1" id="editor1"></textarea>	
 						<script type="text/javascript">
 							CKEDITOR.replace( 'editor1', {
 								allowedContent: true,
@@ -115,6 +126,7 @@
 	alert( notExposed() );
 	</script>
 	-->
+  <script type="text/javascript" src="ckeditor/processing.js"></script>
 	<script type="text/javascript" src="action.js"></script>
 </body>
 </html>
