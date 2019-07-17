@@ -1,0 +1,24 @@
+@media only screen and (min-width: 321px) and (max-width: 451px)
+{
+  .header-logo span {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 320px)
+{
+  header {
+    height: 129.5px;
+  }
+
+  .header-logo {
+    font-size: 37px;
+    float: none;
+    text-align: center;
+  }
+  
+  .control-panel {
+    margin-left: 1px;
+    margin-right: 10px;
+  }
+}

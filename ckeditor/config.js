@@ -8,8 +8,7 @@ CKEDITOR.editorConfig = function( config ) {
 	config.removePlugins = "toolbar,elementspath";
 	config.resize_enabled = false;
 	config.language = 'ru';
-	config.uiColor = '#ffffff';
-	config.height = '88vh';
+	config.height = '100vh';
 	config.toolbarLocation = 'bottom';
 	config.startupMode = 'wysiwyg';
 };
