@@ -66,6 +66,10 @@ function copyStringToClipboard(str) {
   document.body.removeChild(el);
 }
 
+if (/mobile/i.test(navigator.userAgent)) {
+  alert("На данный момент вставка работает только с помощью комбинации клавиш ctrl+V.\nНа телефоне приложение работает некорректно.");
+}
+
 /*
 function setCookie(name,value,days) {
     let expires = "";

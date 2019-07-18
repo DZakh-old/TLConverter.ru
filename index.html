@@ -53,40 +53,37 @@
 			</div>
 		</header>
 		<main>
-			<div class="column"></div>
-			<div class="column view">
-				<div class="working-zone view">		
-					<div id="textarea">
-						<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
-						<textarea name="editor1" id="editor1"></textarea>	
-						<script type="text/javascript">
-							CKEDITOR.replace( 'editor1', {
-								allowedContent: true,
-								startupFocus : true,
-								toolbar: []
-							} );
-							CKEDITOR.instances.editor1.on( 'paste', function (evt) {
-								performPasting(evt.data.dataValue);
-							} );
-			      </script>
-			      <div id="scroll-gag"></div>		
-					</div>
-					<div id="first-board">
-						<div class="central-circle">
-							<img alt="" src="images/paste-from-clipboard.svg" />
-							<p><br />Вставьте текст</p>
-						</div>
-					</div>
-					<div id="second-board" >
-						<div class="central-circle">
-							<button id="copy-btn">Скопируйте</button>
-							<p id="small-size-text"><br />или</p>
-							<p><br />Вставьте<br />следующий<br />текст</p>
-						</div>
-					</div>		
+			<div class="working-zone view">		
+				<div id="textarea">
+					<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
+					<textarea name="editor1" id="editor1"></textarea>	
+					<script type="text/javascript">
+						CKEDITOR.replace( 'editor1', {
+							allowedContent: true,
+							startupFocus : true,
+							toolbar: []
+						} );
+						CKEDITOR.instances.editor1.on( 'paste', function (evt) {
+							performPasting(evt.data.dataValue);
+						} );
+		      </script>
+		      <div id="scroll-gag"></div>		
 				</div>
+				<div id="first-board">
+					<div class="central-circle">
+						<img alt="" src="images/paste-from-clipboard.svg" />
+						<p>Вставьте текст</p>
+					</div>
+				</div>
+				<div id="second-board" >
+					<div class="central-circle">
+						<button id="copy-btn">Скопируйте</button>
+						<p id="small-size-text"><br />или</p>
+						<p><br />Вставьте<br />следующий<br />текст</p>
+					</div>
+				</div>
+				<a href="https://money.yandex.ru/to/410011934415775/50" target="_blank"><p id="donation">Поддержите проект звонкой монетой!</p></a>	
 			</div>
-			<div class="column"></div>
 		</main>
 		<footer>
 			<div class="view">
