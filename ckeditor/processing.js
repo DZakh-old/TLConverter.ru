@@ -27,10 +27,12 @@ function processHtml(workingData) {
     workingData = workingData.replace(/ style="font-family:&quot;Tahoma&quot;,sans-serif"/gim, '');
     workingData = workingData.replace(/ style="font-family:&quot;MS Gothic&quot;"/gim, '');
     workingData = workingData.replace(/ style="color:black"/gim, '');
+    workingData = workingData.replace(/ style="color:#000000"/gim, '');
     workingData = workingData.replace(/ style="background:white"/gim, '');
     workingData = workingData.replace(/margin\S+px; /gim, '');
     workingData = workingData.replace(/ margin\S+px/gim, '');
     workingData = workingData.replace(/ lang="\w*"/gim, '');
+    workingData = workingData.replace(/<i><\/i>/gim, '<p>&nbsp;<\/p>');
     workingData = workingData.replace(/(?<=[\W])><\/span>(?=<\/span>)/gim, '>&nbsp;</span>');
   }
 
