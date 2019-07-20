@@ -25,7 +25,8 @@ function pressedInfo() {
 
 /* Work with the first panel above the CKEditor */
 firstBoard.addEventListener('click', function() {
-  CKEDITOR.instances.editor1.focus();
+  CKEDITOR.instances.editor1.focus(); 
+
   CKEDITOR.instances.editor1.setData('');
 } );
 

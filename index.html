@@ -63,8 +63,17 @@
 							startupFocus : true,
 							toolbar: []
 						} );
+						CKEDITOR.instances.editor1.on( 'blur', function() {
+      				CKEDITOR.instances.editor1.focus(); 
+      			} );
 						CKEDITOR.instances.editor1.on( 'paste', function (evt) {
 							performPasting(evt.data.dataValue);
+						} );
+						CKEDITOR.instances.editor1.on( 'key', function (evt) {
+							let key = evt.data.keyCode;
+							if (!(key == CKEDITOR.CTRL || key == CKEDITOR.CTRL + 86))
+								CKEDITOR.instances.editor1.setData('');
+							
 						} );
 		      </script>
 		      <div id="scroll-gag"></div>		
