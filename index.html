@@ -53,7 +53,11 @@
 			</div>
 		</header>
 		<main>
-			<div class="working-zone view">		
+			<div class="working-zone view">
+				<div class="centralization" id="pasting-request">
+						<img alt="" src="images/paste-from-clipboard.svg" />
+						<p>Вставьте текст</p>
+				</div>	
 				<div id="textarea">
 					<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
 					<textarea name="editor1" id="editor1"></textarea>	
@@ -72,20 +76,13 @@
 						CKEDITOR.instances.editor1.on( 'key', function (evt) {
 							let key = evt.data.keyCode;
 							if (!(key == CKEDITOR.CTRL || key == CKEDITOR.CTRL + 86))
-								CKEDITOR.instances.editor1.setData('');
-							
+								CKEDITOR.instances.editor1.setData('');					
 						} );
 		      </script>
 		      <div id="scroll-gag"></div>		
-				</div>
-				<div id="first-board">
-					<div class="central-circle">
-						<img alt="" src="images/paste-from-clipboard.svg" />
-						<p>Вставьте текст</p>
-					</div>
-				</div>
-				<div id="second-board" >
-					<div class="central-circle">
+				</div>				
+				<div id="result-board" >
+					<div class="centralization">
 						<button id="copy-btn">Скопируйте</button>
 						<p id="small-size-text"><br />или</p>
 						<p><br />Вставьте<br />следующий<br />текст</p>

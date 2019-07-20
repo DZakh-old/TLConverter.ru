@@ -69,21 +69,22 @@
 */
 @media only screen and (max-height: 450px)
 {
-  .central-circle {
+  .centralization {
     width: 160px;
     height: 50px;
-    border-radius: 80px / 400px;
-    text-align: center;
     padding: 0;
   }
-  .central-circle img {
+  #pasting-request p {
+    font-size: 120%;
+  }
+  #pasting-request img {
     display: none;
   }
-  #second-board p {
+  #result-board p {
     display: none;
   }
   #copy-btn {
-    height: 50px;
     width: 160px;
+    height: 50px;
   }
 }

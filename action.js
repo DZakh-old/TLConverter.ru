@@ -1,16 +1,14 @@
 'use strict';
 
 let originData;
-let firstBoard = document.getElementById('first-board');
-let secondBoard = document.getElementById('second-board');
+let resultBoard = document.getElementById('result-board');
 let copyBtn = document.getElementById('copy-btn');
 
 function performPasting(evtData) {
   originData = getFixedData(evtData);
   evtData = '';
   CKEDITOR.instances.editor1.setMode('source');
-  firstBoard.style.display = "none";
-  secondBoard.style.display = "block";
+  resultBoard.style.display = "block";
   processHtml(originData);
 }
 
@@ -23,15 +21,8 @@ function pressedInfo() {
   alert(manualContent);
 }
 
-/* Work with the first panel above the CKEditor */
-firstBoard.addEventListener('click', function() {
-  CKEDITOR.instances.editor1.focus(); 
-
-  CKEDITOR.instances.editor1.setData('');
-} );
-
-/* Work with the second panel above the CKEditor */
-secondBoard.addEventListener('click', function() {
+/* Work with the result panel above the CKEditor */
+resultBoard.addEventListener('click', function() {
   if (isHover(copyBtn) === true) {
     copyStringToClipboard(CKEDITOR.instances.editor1.getData());
   } else {
@@ -41,8 +32,7 @@ secondBoard.addEventListener('click', function() {
     CKEDITOR.instances.editor1.setMode('wysiwyg', function() {
       CKEDITOR.instances.editor1.focus(); 
     } );
-    secondBoard.style.display = "none";
-    firstBoard.style.display = "block";
+    resultBoard.style.display = "none";
   }
 } );
 

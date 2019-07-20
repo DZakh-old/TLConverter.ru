@@ -3,7 +3,7 @@
   --main-dark-gray-color: #202124;
   --main-light-gray-color: #323639;
   --more-light-gray-color: #41464a;
-}
+  --very-light-gray-color: #747d84;}
 * {
   padding: 0;
   margin: 0;
@@ -131,27 +131,8 @@ main {
 /*
 * --- NOTIFICATIONS ---
 */
-#first-board {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left:0;
-  right:0;
-  background: none;
-}
-#first-board p {
-  margin-top: 15px;
-}
-#second-board {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left:0;
-  right:0;
-  display: none;
-  background: none;
-}
-.central-circle {
+
+.centralization {
   background: white;
   position: absolute;
   top: 0;
@@ -166,9 +147,21 @@ main {
   color: var(--more-dark-gray-color);
   padding-top: 50px;
 }
-.central-circle img {
+.centralization img {
   margin-top: 13px;
   width: 64px;
+}
+#pasting-request p {
+  margin-top: 13px;
+}
+#result-board {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left:0;
+  right:0;
+  display: none;
+  background: none;
 }
 #copy-btn {
   background: white;
@@ -183,8 +176,8 @@ main {
   font-weight: bold;
 }
 #copy-btn:hover {
-  border-color: var(--more-light-gray-color);
-  background: var(--more-light-gray-color);
+  border-color: var(--very-light-gray-color);
+  background: var(--very-light-gray-color);
   color: white;
 }
 #copy-btn:active {
@@ -210,7 +203,7 @@ footer p {
   font-size: 8pt;
   font-variant: normal;
   text-align: center;
-  color: #747d84;
+  color: var(--very-light-gray-color);
 }
 
 /*
@@ -227,4 +220,10 @@ footer p {
 }
 #donation:hover {
   font-weight: bolder;
+}
+
+
+.cke_contents, .cke_contents iframe, .cke_wrapper
+{
+  background-color: Transparent !important;
 }
