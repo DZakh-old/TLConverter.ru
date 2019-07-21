@@ -29,15 +29,16 @@ function processHtml(workingData) {
     workingData = workingData.replace(/ style="color:black"/gim, '');
     workingData = workingData.replace(/ style="color:#000000"/gim, '');
     workingData = workingData.replace(/ style="background:white"/gim, '');
+    workingData = workingData.replace(/ style="background:#ffffff"/gim, '');
     workingData = workingData.replace(/margin\S+px; /gim, '');
     workingData = workingData.replace(/ margin\S+px/gim, '');
     workingData = workingData.replace(/ lang="\w*"/gim, '');
     workingData = workingData.replace(/<i><\/i>/gim, '<p>&nbsp;<\/p>');
-    workingData = workingData.replace(/(?<=[\W])><\/span>(?=<\/span>)/gim, '>&nbsp;</span>');
+    workingData = workingData.replace(RegExp('(?<=[\W])><\/span>(?=<\/span>)', 'gim'), '>&nbsp;</span>');
   }
 
   function replaceMostFrequentSize() {
-    let regexForMatching = /(?<= style="font-size:)\S+(?=pt")/gim;
+    let regexForMatching = RegExp('(?<= style="font-size:)\S+(?=pt")', 'gim');
     let arrayOfSizes = workingData.match(regexForMatching);
 
     if (arrayOfSizes != null) {
@@ -54,7 +55,7 @@ function processHtml(workingData) {
   }
 
   function replaceMostFrequentFont() {
-    let regexForMatching = /(?<= style="font-family:)[^<">]+(?=")/gim;
+    let regexForMatching = RegExp('(?<= style="font-family:)[^<">]+(?=")', 'gim');
     let arrayOfSizes = workingData.match(regexForMatching);
 
     if (arrayOfSizes != null) {
