@@ -4,16 +4,19 @@ let originData;
 let resultBoard = document.getElementById('result-board');
 let copyBtn = document.getElementById('copy-btn');
 
-function performPasting(evtData) {
-  originData = getFixedData(evtData);
-  evtData = '';
-  CKEDITOR.instances.editor1.setMode('source');
-  resultBoard.style.display = "block";
-  processHtml(originData);
+window.onload = function() {
+  if (localStorage.getItem('state-of-sw-size') == 'true')
+    document.getElementById('sw-size').checked = true;
+  if (localStorage.getItem('state-of-sw-font') == 'true')
+    document.getElementById('sw-font').checked = true;
+  if (localStorage.getItem('state-of-sw-auto') == 'true')
+    document.getElementById('sw-auto').checked = true;
 }
 
-function pressedSwitch() {
-  if (CKEDITOR.instances.editor1.mode === 'source')
+function pressedSwitch(theSwitch) {
+  let state = document.getElementById(theSwitch).checked;
+  localStorage.setItem('state-of-' + theSwitch, state);
+  if (theSwitch !== 'sw-auto' && CKEDITOR.instances.editor.mode === 'source')
     processHtml(originData);
 }
 
@@ -24,13 +27,13 @@ function pressedInfo() {
 /* Work with the result panel above the CKEditor */
 resultBoard.addEventListener('click', function() {
   if (isHover(copyBtn) === true) {
-    copyStringToClipboard(CKEDITOR.instances.editor1.getData());
+    copyStringToClipboard(CKEDITOR.instances.editor.getData());
   } else {
     originData = '';
-    CKEDITOR.instances.editor1.setData('');
+    CKEDITOR.instances.editor.setData('');
     /* It is this strange because of a bug with focus */
-    CKEDITOR.instances.editor1.setMode('wysiwyg', function() {
-      CKEDITOR.instances.editor1.focus(); 
+    CKEDITOR.instances.editor.setMode('wysiwyg', function() {
+      CKEDITOR.instances.editor.focus(); 
     } );
     resultBoard.style.display = "none";
   }
@@ -57,55 +60,17 @@ function copyStringToClipboard(str) {
   document.body.removeChild(el);
 }
 
+function performPasting(evtData) {
+  originData = getFixedData(evtData);
+  evtData = '';
+  CKEDITOR.instances.editor.setMode('source');
+  resultBoard.style.display = "block";
+  processHtml(originData);
+}
+
 if (/mobile/i.test(navigator.userAgent)) {
   alert("На данный момент вставка работает только с помощью комбинации клавиш ctrl+V.\nНа телефоне приложение работает некорректно.");
 }
-
-/*
-function setCookie(name,value,days) {
-    let expires = "";
-    if (days) {
-        let date = new Date();
-        date.setTime(date.getTime() + (days*24*60*60*1000));
-        expires = "; expires=" + date.toUTCString();
-    }
-    document.cookie = name + "=" + (value || "")  + expires + "; path=/";
-}
-
-function getCookie(name) {
-    let nameEQ = name + "=";
-    let ca = document.cookie.split(';');
-    for(let i =  0;i < ca.length; i++) {
-      var c = ca[i];
-      while (c.charAt(0) == ' ') 
-        c = c.substring(1, c.length);
-      if (c.indexOf(nameEQ) == 0) 
-        return c.substring(nameEQ.length, c.length);
-    }
-    return null;
-}
-
-function eraseCookie(name) {   
-    document.cookie = name+'=; Max-Age=-99999999;';  
-}
-*/
-/*
-Sources:
-https://notare-hw.de/_scripts/3rdparty/ckeditor/samples/old/datafiltering.html
-https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions
-https://regex101.com/
-https://webdesign.tutsplus.com/tutorials/how-to-build-a-full-screen-responsive-page-with-flexbox--cms-32086
-https://ckeditor.com/docs/ckeditor4/latest/
-https://stackoverflow.com/questions/9456289/how-to-make-a-div-visible-and-invisible-with-javascript
-https://stackoverflow.com/questions/1053843/get-the-element-with-the-highest-occurrence-in-an-array
-https://techoverflow.net/2018/03/30/copying-strings-to-the-clipboard-using-pure-javascript/
-Possible function:
-https://www.w3schools.com/js/js_htmldom_eventlistener.how-to-build-a-full-screen-responsive-page-with-flexbox--cms-32086
-https://stackoverflow.com/questions/2010335/ckeditor-onpaste-event
-
-https://jscompress.com/
-*/
-
 
 let manualContent = "Приветствую вас в конверторе текста «TLConvetor», это приложение создано для того, чтобы из вордовского текста получить HTML код, который можно вставить в редактор сайта «tl.rulate.ru» с минимумом искажений.\n\
 Пошаговое руководство:\n\

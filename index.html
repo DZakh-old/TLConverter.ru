@@ -29,18 +29,18 @@
 			<div class="view">
 				<div class="header-logo">TLC<span>onverter</span></div>
 				<div class="control-panel">
-					<input type="checkbox" onclick="pressedSwitch()" id="switch-size"/>
-				  <label class="elem switches" for="switch-size">
+					<input type="checkbox" onclick="pressedSwitch('sw-size')" id="sw-size"/>
+				  <label class="elem switches" for="sw-size">
 						<img alt="" src="images/outline-format_size-24px.svg" />
 						<p>Size</p>
 				  </label>
-				  <input type="checkbox" onclick="pressedSwitch()" id="switch-font"/>
-				  <label class="elem switches" for="switch-font">
+				  <input type="checkbox" onclick="pressedSwitch('sw-font')" id="sw-font"/>
+				  <label class="elem switches" for="sw-font">
 				  	<img alt="" src="images/outline-font_download-24px.svg" />
 						<p>Font</p>
 				  </label>
-				  <input type="checkbox" id="switch-auto" />
-				  <label class="elem switches" for="switch-auto">
+				  <input type="checkbox" onclick="pressedSwitch('sw-auto')" id="sw-auto" />
+				  <label class="elem switches" for="sw-auto">
 				   	<img alt="" src="images/outline-autorenew-24px.svg" />
 						<p>Auto</p>
 					</label>
@@ -60,23 +60,23 @@
 				</div>	
 				<div id="textarea">
 					<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
-					<textarea name="editor1" id="editor1"></textarea>	
+					<textarea name="editor" id="editor"></textarea>	
 					<script type="text/javascript">
-						CKEDITOR.replace( 'editor1', {
+						CKEDITOR.replace( 'editor', {
 							allowedContent: true,
 							startupFocus : true,
 							toolbar: []
 						} );
-						CKEDITOR.instances.editor1.on( 'blur', function() {
-      				CKEDITOR.instances.editor1.focus(); 
+						CKEDITOR.instances.editor.on( 'blur', function() {
+      				CKEDITOR.instances.editor.focus(); 
       			} );
-						CKEDITOR.instances.editor1.on( 'paste', function (evt) {
+						CKEDITOR.instances.editor.on( 'paste', function (evt) {
 							performPasting(evt.data.dataValue);
 						} );
-						CKEDITOR.instances.editor1.on( 'key', function (evt) {
+						CKEDITOR.instances.editor.on( 'key', function (evt) {
 							let key = evt.data.keyCode;
 							if (!(key == CKEDITOR.CTRL || key == CKEDITOR.CTRL + 86))
-								CKEDITOR.instances.editor1.setData('');					
+								CKEDITOR.instances.editor.setData('');					
 						} );
 		      </script>
 		      <div id="scroll-gag"></div>		
@@ -99,39 +99,7 @@
 			</div>
 		</footer>
 	</div>
-	<!--
-	<script type="text/javascript" src="cookies/cookies.js"></script>
-	<script type="text/javascript">
-		let switchSize = document.getElementById('switch-size');
-		
-		if (docCookies.hasItem("sizeState")) {
-			alert("I'm here");
-		} else {
-			switchSize.checked = true;
-		}
-		switchSize.addEventListener('click', function() {
-		  docCookies.setItem("sizeState","true",Infinity);
-		});
-	</script>
-	-->
-	<!--
-		<script runat="server">
-	function exposed() {
-		return "exposed to the browser";
-	}
-
-	function notExposed() {
-		return "can't see me!";
-	}
-	</script>
-	 
-
-	<script runat="client">
-	alert( exposed() );
-	alert( notExposed() );
-	</script>
-	-->
-  <script type="text/javascript" src="ckeditor/processing.js"></script>
+	<script type="text/javascript" src="ckeditor/processing.js"></script>
 	<script type="text/javascript" src="action.js"></script>
 </body>
 </html>

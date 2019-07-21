@@ -16,10 +16,10 @@ function processHtml(workingData) {
   replaceMostFrequentFont();
   replaceTrashSpans();
 
-  if (document.getElementById("switch-auto").checked) 
+  if (document.getElementById("sw-auto").checked) 
     copyStringToClipboard(workingData);
 
-  CKEDITOR.instances.editor1.setData(workingData);
+  CKEDITOR.instances.editor.setData(workingData);
 
 
   function replaceEssentialStuff() {
@@ -43,7 +43,7 @@ function processHtml(workingData) {
     if (arrayOfSizes != null) {
       const {mode, numOfMode, numOf2ndMode} = getModeValues(arrayOfSizes);
       /* add: if (isNumber(mode)) */
-      const switchChecked = document.getElementById("switch-size").checked;
+      const switchChecked = document.getElementById("sw-size").checked;
       let regexForReplacing = RegExp(' style="font-size:' + mode + 'pt"', 'gim');
 
       if (switchChecked || numOfMode == numOfParagraphs && !switchChecked)
@@ -59,7 +59,7 @@ function processHtml(workingData) {
 
     if (arrayOfSizes != null) {
       const {mode, numOfMode, numOf2ndMode} = getModeValues(arrayOfSizes);
-      const switchChecked = document.getElementById("switch-font").checked;
+      const switchChecked = document.getElementById("sw-font").checked;
       let regexForReplacing = RegExp(' style="font-family:' + mode + '"', 'gim');
       if (switchChecked || numOfMode == numOfParagraphs && !switchChecked)
         workingData = workingData.replace(regexForReplacing, '');

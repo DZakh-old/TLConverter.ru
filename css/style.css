@@ -223,7 +223,9 @@ footer p {
   font-weight: bolder;
 }
 
-
+/*
+* --- CKEDITOR ---
+*/
 .cke_contents, .cke_contents iframe, .cke_wrapper
 {
   background-color: Transparent !important;
