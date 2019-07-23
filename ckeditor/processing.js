@@ -14,8 +14,8 @@ function processHtml(workingData) {
   replaceEssentialStuff(); 
   replaceMostFrequentSize();
   replaceMostFrequentFont();
-  replaceTrashSpans();
   replaceEmptyParagraphs();
+  replaceTrashSpans();
 
   if (document.getElementById("sw-auto").checked) 
     copyStringToClipboard(workingData);
@@ -37,7 +37,6 @@ function processHtml(workingData) {
     workingData = workingData.replace(/<i><\/i>/gim, '<p>&nbsp;<\/p>');
     while (workingData.match(/<span[^>]+><span><\/span><\/span>/gim) != null)
       workingData = workingData.replace(/<span[^>]+><span><\/span><\/span>/gim, '<span></span>');
-    workingData = workingData.replace(RegExp('(?<=[\W])><\/span>(?=<\/span>)', 'gim'), '>&nbsp;</span>');
   }
 
   function replaceMostFrequentSize() {
@@ -72,6 +71,11 @@ function processHtml(workingData) {
     }
   } 
 
+  function replaceEmptyParagraphs() {
+    workingData = workingData.replace(/<span[^>]*><\/span>/gim, '&nbsp;');
+    workingData = workingData.replace(/<p[^>]*><\/p>/gim, '<p>&nbsp;</p>');
+  }
+
   function replaceTrashSpans() {
     /* The position of current "<span>" */
     let currentPosition = -1;
@@ -91,10 +95,6 @@ function processHtml(workingData) {
       workingData = workingData.slice(0, closingPosition) + workingData.slice(closingPosition + lenghtOfClosingSpan);
     }
     workingData = workingData.replace(/<span>/gim, '');
-  }
-
-  function replaceEmptyParagraphs() {
-    workingData = workingData.replace(/<p[^>]*><\/p>/gim, '<p>&nbsp;</p>');
   }
 }
 
