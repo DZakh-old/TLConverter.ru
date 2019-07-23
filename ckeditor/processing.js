@@ -15,6 +15,7 @@ function processHtml(workingData) {
   replaceMostFrequentSize();
   replaceMostFrequentFont();
   replaceTrashSpans();
+  replaceEmptyParagraphs();
 
   if (document.getElementById("sw-auto").checked) 
     copyStringToClipboard(workingData);
@@ -90,6 +91,10 @@ function processHtml(workingData) {
       workingData = workingData.slice(0, closingPosition) + workingData.slice(closingPosition + lenghtOfClosingSpan);
     }
     workingData = workingData.replace(/<span>/gim, '');
+  }
+
+  function replaceEmptyParagraphs() {
+    workingData = workingData.replace(/<p[^>]*><\/p>/gim, '<p>&nbsp;</p>');
   }
 }
 
