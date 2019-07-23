@@ -34,18 +34,19 @@ function processHtml(workingData) {
     workingData = workingData.replace(/ margin\S+px/gim, '');
     workingData = workingData.replace(/ lang="\w*"/gim, '');
     workingData = workingData.replace(/<i><\/i>/gim, '<p>&nbsp;<\/p>');
+    while (workingData.match(/<span[^>]+><span><\/span><\/span>/gim) != null)
+      workingData = workingData.replace(/<span[^>]+><span><\/span><\/span>/gim, '<span></span>');
     workingData = workingData.replace(RegExp('(?<=[\W])><\/span>(?=<\/span>)', 'gim'), '>&nbsp;</span>');
   }
 
   function replaceMostFrequentSize() {
-    let regexForMatching = RegExp('(?<= style="font-size:)\S+(?=pt")', 'gim');
+    let regexForMatching = RegExp('(?<=font-size:)[0-9\.]*', 'gim');
     let arrayOfSizes = workingData.match(regexForMatching);
 
     if (arrayOfSizes != null) {
       const {mode, numOfMode, numOf2ndMode} = getModeValues(arrayOfSizes);
-      /* add: if (isNumber(mode)) */
       const switchChecked = document.getElementById("sw-size").checked;
-      let regexForReplacing = RegExp(' style="font-size:' + mode + 'pt"', 'gim');
+      let regexForReplacing = RegExp(' style="font-size:' + mode + '([\.][0-9])*pt"', 'gim');
 
       if (switchChecked || numOfMode == numOfParagraphs && !switchChecked)
         workingData = workingData.replace(regexForReplacing, '');
@@ -62,6 +63,7 @@ function processHtml(workingData) {
       const {mode, numOfMode, numOf2ndMode} = getModeValues(arrayOfSizes);
       const switchChecked = document.getElementById("sw-font").checked;
       let regexForReplacing = RegExp(' style="font-family:' + mode + '"', 'gim');
+
       if (switchChecked || numOfMode == numOfParagraphs && !switchChecked)
         workingData = workingData.replace(regexForReplacing, '');
       if (numOfMode == numOfParagraphs || numOfMode == numOf2ndMode)

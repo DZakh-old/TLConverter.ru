@@ -155,6 +155,10 @@ main {
 #pasting-request p {
   margin-top: 13px;
 }
+#notification {
+  font-size: 50%;
+  font-weight: lighter;
+}
 #result-board {
   position: absolute;
   top: 0;
