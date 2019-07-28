@@ -4,19 +4,18 @@
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-144010670-1"></script>
 	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-
-	  gtag('config', 'UA-144010670-1');
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'UA-144010670-1');
 	</script>
-
 	<meta name="google-site-verification" content="9Wym74xcdwjB6w6uPpwXrgIdMLlhgKsWNdybvfaCuFs" />
+	<meta name="yandex-verification" content="2f18e461b9ebabef" />
 	<meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="Description" content="Created by dmirdDZ, converter for word into html, tl.rulate, конвертер для рулета">
-  <meta name="keywords" content="TLConverter, конвертация текста, получить сырой код из ворда">
-  <meta name="theme-color" content="#323639"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="Description" content="TLConverter - конвертируй текст из ворда в рулет. Created by dmirdDZ.">
+	<meta name="keywords" content="TLConverter, конвертация текста, получить сырой код из ворда">
+	<meta name="theme-color" content="#323639"/>
 	<title>TLСonvertor</title>
 	<link rel="icon" href="images/site-icon.ico">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
@@ -29,64 +28,70 @@
 			<div class="view">
 				<div class="header-logo">TLC<span>onverter</span></div>
 				<div class="control-panel">
-					<input type="checkbox" onclick="pressedSwitch()" id="switch-size"/>
-				  <label class="elem switches" for="switch-size">
+					<input type="checkbox" onclick="pressedSwitch('sw-size')" id="sw-size"/>
+					<label class="elem switches" for="sw-size">
 						<img alt="" src="images/outline-format_size-24px.svg" />
 						<p>Size</p>
-				  </label>
-				  <input type="checkbox" onclick="pressedSwitch()" id="switch-font"/>
-				  <label class="elem switches" for="switch-font">
-				  	<img alt="" src="images/outline-font_download-24px.svg" />
+					</label>
+					<input type="checkbox" onclick="pressedSwitch('sw-font')" id="sw-font"/>
+					<label class="elem switches" for="sw-font">
+						<img alt="" src="images/outline-font_download-24px.svg" />
 						<p>Font</p>
-				  </label>
-				  <input type="checkbox" id="switch-auto" />
-				  <label class="elem switches" for="switch-auto">
-				   	<img alt="" src="images/outline-autorenew-24px.svg" />
+					</label>
+					<input type="checkbox" onclick="pressedSwitch('sw-auto')" id="sw-auto" />
+					<label class="elem switches" for="sw-auto">
+					 	<img alt="" src="images/outline-autorenew-24px.svg" />
 						<p>Auto</p>
 					</label>
-				  <input type="checkbox" onclick="pressedInfo()" id="info-btn" />
-				  <label class="elem" for="info-btn">
-				   	<img alt="" src="images/outline-help_outline-24px.svg" />
+					<input type="checkbox" onclick="pressedInfo()" id="info-btn" />
+					<label class="elem" for="info-btn">
+					 	<img alt="" src="images/outline-help_outline-24px.svg" />
 						<p>Info</p>
-				  </label>
+					</label>
 				</div>
 			</div>
 		</header>
 		<main>
-			<div class="column"></div>
-			<div class="column view">
-				<div class="working-zone view">		
-					<div id="textarea">
-						<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
-						<textarea name="editor1" id="editor1"></textarea>	
-						<script type="text/javascript">
-							CKEDITOR.replace( 'editor1', {
-								allowedContent: true,
-								startupFocus : true,
-								toolbar: []
-							} );
-							CKEDITOR.instances.editor1.on( 'paste', function (evt) {
-								performPasting(evt.data.dataValue);
-							} );
-			      </script>
-			      <div id="scroll-gag"></div>		
+			<div class="working-zone view">
+				<div class="centralization" id="pasting-request">
+						<img alt="" src="images/paste-from-clipboard.svg" />
+						<p>Вставьте текст</p>
+						<p id="notification">!: Таблицы работают неидеально. Кому не сложно, пришлите на рулейт файл с какой-либо таблицей (желательно из главы).</p>
+				</div>	
+				<div id="textarea">
+					<script type="text/javascript" src="ckeditor/ckeditor.js"></script>
+					<textarea name="editor" id="editor"></textarea>	
+					<script type="text/javascript">
+						CKEDITOR.replace( 'editor', {
+							allowedContent: true,
+							startupFocus : true,
+							toolbar: []
+						} );
+						CKEDITOR.instances.editor.on( 'blur', function() {
+							CKEDITOR.instances.editor.focus(); 
+						} );
+						CKEDITOR.instances.editor.on( 'paste', function (evt) {
+							performPasting(evt.data.dataValue);
+						} );
+						CKEDITOR.instances.editor.on( 'key', function (evt) {
+							let key = evt.data.keyCode;
+							if (!(key == CKEDITOR.CTRL || key == CKEDITOR.CTRL + 86))
+								CKEDITOR.instances.editor.setData('');					
+						} );
+					</script>
+					<div id="scroll-gag"></div>		
+				</div>				
+				<div id="result-board" >
+					<div class="centralization">
+						<button id="copy-btn">Скопируйте</button>
+						<p id="small-size-text"><br />или</p>
+						<p><br />Вставьте<br />следующий<br />текст</p>
 					</div>
-					<div id="first-board">
-						<div class="central-circle">
-							<img alt="" src="images/paste-from-clipboard.svg" />
-							<p><br />Вставьте текст</p>
-						</div>
-					</div>
-					<div id="second-board" >
-						<div class="central-circle">
-							<button id="copy-btn">Скопируйте</button>
-							<p id="small-size-text"><br />или</p>
-							<p><br />Вставьте<br />следующий<br />текст</p>
-						</div>
-					</div>		
 				</div>
+				<a href="https://money.yandex.ru/to/410011934415775/50" target="_blank" rel="noopener">
+					<p id="donation">Поддержите проект звонкой монетой!</p>
+				</a>	
 			</div>
-			<div class="column"></div>
 		</main>
 		<footer>
 			<div class="view">
@@ -94,39 +99,7 @@
 			</div>
 		</footer>
 	</div>
-	<!--
-	<script type="text/javascript" src="cookies/cookies.js"></script>
-	<script type="text/javascript">
-		let switchSize = document.getElementById('switch-size');
-		
-		if (docCookies.hasItem("sizeState")) {
-			alert("I'm here");
-		} else {
-			switchSize.checked = true;
-		}
-		switchSize.addEventListener('click', function() {
-		  docCookies.setItem("sizeState","true",Infinity);
-		});
-	</script>
-	-->
-	<!--
-		<script runat="server">
-	function exposed() {
-		return "exposed to the browser";
-	}
-
-	function notExposed() {
-		return "can't see me!";
-	}
-	</script>
-	 
-
-	<script runat="client">
-	alert( exposed() );
-	alert( notExposed() );
-	</script>
-	-->
-  <script type="text/javascript" src="ckeditor/processing.js"></script>
+	<script type="text/javascript" src="ckeditor/processing.js"></script>
 	<script type="text/javascript" src="action.js"></script>
 </body>
 </html>

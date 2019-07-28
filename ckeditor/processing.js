@@ -14,12 +14,13 @@ function processHtml(workingData) {
   replaceEssentialStuff(); 
   replaceMostFrequentSize();
   replaceMostFrequentFont();
+  replaceEmptyParagraphs();
   replaceTrashSpans();
 
-  if (document.getElementById("switch-auto").checked) 
+  if (document.getElementById("sw-auto").checked) 
     copyStringToClipboard(workingData);
 
-  CKEDITOR.instances.editor1.setData(workingData);
+  CKEDITOR.instances.editor.setData(workingData);
 
 
   function replaceEssentialStuff() {
@@ -27,22 +28,25 @@ function processHtml(workingData) {
     workingData = workingData.replace(/ style="font-family:&quot;Tahoma&quot;,sans-serif"/gim, '');
     workingData = workingData.replace(/ style="font-family:&quot;MS Gothic&quot;"/gim, '');
     workingData = workingData.replace(/ style="color:black"/gim, '');
+    workingData = workingData.replace(/ style="color:#000000"/gim, '');
     workingData = workingData.replace(/ style="background:white"/gim, '');
+    workingData = workingData.replace(/ style="background:#ffffff"/gim, '');
     workingData = workingData.replace(/margin\S+px; /gim, '');
     workingData = workingData.replace(/ margin\S+px/gim, '');
     workingData = workingData.replace(/ lang="\w*"/gim, '');
-    workingData = workingData.replace(/(?<=[\W])><\/span>(?=<\/span>)/gim, '>&nbsp;</span>');
+    workingData = workingData.replace(/<i><\/i>/gim, '<p>&nbsp;<\/p>');
+    while (workingData.match(/<span[^>]+><span><\/span><\/span>/gim) != null)
+      workingData = workingData.replace(/<span[^>]+><span><\/span><\/span>/gim, '<span></span>');
   }
 
   function replaceMostFrequentSize() {
-    let regexForMatching = /(?<= style="font-size:)\S+(?=pt")/gim;
+    let regexForMatching = RegExp('(?<=font-size:)[0-9\.]*', 'gim');
     let arrayOfSizes = workingData.match(regexForMatching);
 
     if (arrayOfSizes != null) {
       const {mode, numOfMode, numOf2ndMode} = getModeValues(arrayOfSizes);
-      /* add: if (isNumber(mode)) */
-      const switchChecked = document.getElementById("switch-size").checked;
-      let regexForReplacing = RegExp(' style="font-size:' + mode + 'pt"', 'gim');
+      const switchChecked = document.getElementById("sw-size").checked;
+      let regexForReplacing = RegExp(' style="font-size:' + mode + '([\.][0-9])*pt"', 'gim');
 
       if (switchChecked || numOfMode == numOfParagraphs && !switchChecked)
         workingData = workingData.replace(regexForReplacing, '');
@@ -52,19 +56,25 @@ function processHtml(workingData) {
   }
 
   function replaceMostFrequentFont() {
-    let regexForMatching = /(?<= style="font-family:)[^<">]+(?=")/gim;
+    let regexForMatching = RegExp('(?<= style="font-family:)[^<">]+(?=")', 'gim');
     let arrayOfSizes = workingData.match(regexForMatching);
 
     if (arrayOfSizes != null) {
       const {mode, numOfMode, numOf2ndMode} = getModeValues(arrayOfSizes);
-      const switchChecked = document.getElementById("switch-font").checked;
+      const switchChecked = document.getElementById("sw-font").checked;
       let regexForReplacing = RegExp(' style="font-family:' + mode + '"', 'gim');
+
       if (switchChecked || numOfMode == numOfParagraphs && !switchChecked)
         workingData = workingData.replace(regexForReplacing, '');
       if (numOfMode == numOfParagraphs || numOfMode == numOf2ndMode)
         replaceMostFrequentFont();
     }
   } 
+
+  function replaceEmptyParagraphs() {
+    workingData = workingData.replace(/<span[^>]*><\/span>/gim, '&nbsp;');
+    workingData = workingData.replace(/<p[^>]*><\/p>/gim, '<p>&nbsp;</p>');
+  }
 
   function replaceTrashSpans() {
     /* The position of current "<span>" */

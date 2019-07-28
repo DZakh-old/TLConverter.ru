@@ -6,6 +6,7 @@
 CKEDITOR.editorConfig = function( config ) {
 	config.extraPlugins = 'pasteFromGoogleDoc';
 	config.removePlugins = "toolbar,elementspath";
+	config.removePlugins = 'liststyle,tableselection,tabletools,tableresize,contextmenu';
 	config.resize_enabled = false;
 	config.language = 'ru';
 	config.height = '100vh';

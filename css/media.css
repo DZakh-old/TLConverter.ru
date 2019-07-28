@@ -1,3 +1,6 @@
+/*
+* --- LOGO ---
+*/
 @media only screen and (min-width: 321px) and (max-width: 451px)
 {
   .header-logo span {
@@ -5,20 +8,86 @@
   }
 }
 
+/*
+* --- HEADER ---
+*/
 @media only screen and (max-width: 320px)
 {
   header {
     height: 129.5px;
   }
-
   .header-logo {
     font-size: 37px;
     float: none;
     text-align: center;
   }
-  
   .control-panel {
     margin-left: 1px;
     margin-right: 10px;
+  }
+}
+
+/*
+* --- DONATION ---
+*/
+@media only screen and (max-width: 700px),
+       only screen and (max-height: 325px)
+{
+  #donation {
+    z-index: 11;
+    bottom: -21px;
+    left: 0;
+    right: 0;
+    transform: none;
+    color: white;
+    text-align: center;
+  }
+  #donation:hover {
+    color: white;
+  }
+  footer {
+    padding-top: 17px;
+    height: 47px;
+  }
+}
+
+/*
+* --- WIDTH ---
+*/
+@media only screen and (max-width: 260px)
+{
+  body{
+    overflow-x: scroll;
+  }
+  footer {
+    height: 67px;
+  }
+}
+
+/*
+* --- HEIGHT ---
+*/
+@media only screen and (max-height: 450px)
+{
+  .centralization {
+    width: 160px;
+    height: 50px;
+    padding: 0;
+  }
+  #pasting-request p {
+    font-size: 120%;
+  }
+  #notification {
+    display: none;
+  }
+  #pasting-request img {
+    display: none;
+  }
+  #result-board p {
+    display: none;
+  }
+  #copy-btn {
+    width: 160px;
+    height: 50px;
   }
 }
