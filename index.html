@@ -4,11 +4,10 @@
 	<!-- Global site tag (gtag.js) - Google Analytics -->
 	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-144010670-1"></script>
 	<script>
-	  window.dataLayer = window.dataLayer || [];
-	  function gtag(){dataLayer.push(arguments);}
-	  gtag('js', new Date());
-
-	  gtag('config', 'UA-144010670-1');
+		window.dataLayer = window.dataLayer || [];
+		function gtag(){dataLayer.push(arguments);}
+		gtag('js', new Date());
+		gtag('config', 'UA-144010670-1');
 	</script>
 	<meta name="google-site-verification" content="9Wym74xcdwjB6w6uPpwXrgIdMLlhgKsWNdybvfaCuFs" />
 	<meta name="yandex-verification" content="2f18e461b9ebabef" />
@@ -30,25 +29,25 @@
 				<div class="header-logo">TLC<span>onverter</span></div>
 				<div class="control-panel">
 					<input type="checkbox" onclick="pressedSwitch('sw-size')" id="sw-size"/>
-				  <label class="elem switches" for="sw-size">
+					<label class="elem switches" for="sw-size">
 						<img alt="" src="images/outline-format_size-24px.svg" />
 						<p>Size</p>
-				  </label>
-				  <input type="checkbox" onclick="pressedSwitch('sw-font')" id="sw-font"/>
-				  <label class="elem switches" for="sw-font">
-				  	<img alt="" src="images/outline-font_download-24px.svg" />
+					</label>
+					<input type="checkbox" onclick="pressedSwitch('sw-font')" id="sw-font"/>
+					<label class="elem switches" for="sw-font">
+						<img alt="" src="images/outline-font_download-24px.svg" />
 						<p>Font</p>
-				  </label>
-				  <input type="checkbox" onclick="pressedSwitch('sw-auto')" id="sw-auto" />
-				  <label class="elem switches" for="sw-auto">
-				   	<img alt="" src="images/outline-autorenew-24px.svg" />
+					</label>
+					<input type="checkbox" onclick="pressedSwitch('sw-auto')" id="sw-auto" />
+					<label class="elem switches" for="sw-auto">
+					 	<img alt="" src="images/outline-autorenew-24px.svg" />
 						<p>Auto</p>
 					</label>
-				  <input type="checkbox" onclick="pressedInfo()" id="info-btn" />
-				  <label class="elem" for="info-btn">
-				   	<img alt="" src="images/outline-help_outline-24px.svg" />
+					<input type="checkbox" onclick="pressedInfo()" id="info-btn" />
+					<label class="elem" for="info-btn">
+					 	<img alt="" src="images/outline-help_outline-24px.svg" />
 						<p>Info</p>
-				  </label>
+					</label>
 				</div>
 			</div>
 		</header>
@@ -69,8 +68,8 @@
 							toolbar: []
 						} );
 						CKEDITOR.instances.editor.on( 'blur', function() {
-      				CKEDITOR.instances.editor.focus(); 
-      			} );
+							CKEDITOR.instances.editor.focus(); 
+						} );
 						CKEDITOR.instances.editor.on( 'paste', function (evt) {
 							performPasting(evt.data.dataValue);
 						} );
@@ -79,8 +78,8 @@
 							if (!(key == CKEDITOR.CTRL || key == CKEDITOR.CTRL + 86))
 								CKEDITOR.instances.editor.setData('');					
 						} );
-		      </script>
-		      <div id="scroll-gag"></div>		
+					</script>
+					<div id="scroll-gag"></div>		
 				</div>				
 				<div id="result-board" >
 					<div class="centralization">
