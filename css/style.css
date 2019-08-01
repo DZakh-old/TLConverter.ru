@@ -15,12 +15,18 @@ body {
   font-variant: small-caps;
   overflow: hidden;
   color: #fff;
-  min-width: 260px;
+  
   -moz-user-select: none;
   -webkit-user-select: none;
   -ms-user-select: none;
   -o-user-select: none;
   user-select: none;
+
+  display: flex;
+  flex-direction: column; 
+  min-height: 100vh;
+  max-height: 100vh;
+  min-width: 260px;
 }
 a {
   color: inherit;
@@ -30,12 +36,6 @@ a {
 /* 
 * --- CONTAINERS ---
 */
-section {
-  display: flex;
-  flex-direction: column; 
-  min-height: 100vh;
-  max-height: 100vh;
-}
 .container {
   width: 98%;
   max-width: 660px;
@@ -52,10 +52,11 @@ header {
   display: flex;
   height: 70px;
 }
-.header-logo {
+h1 {
   margin: 15px 11px 0 11px;
   font-size: 37px;
-  float: left; 
+  font-weight: 400;
+  float: left;
 }
 .elem {
   padding-top: 8px;
@@ -78,10 +79,13 @@ header {
 .control-panel {
   float: right;
 }
-.control-panel input[type=checkbox]{
+.control-panel span {
+  display: block;
+}
+.control-panel input[type=checkbox] {
   display: none;
 }
-.control-panel input[type=checkbox]:checked + .switches{
+.control-panel input[type=checkbox]:checked + .switches {
   background-color: var(--main-dark-gray-color);
   border-color: var(--more-dark-gray-color);
 }
