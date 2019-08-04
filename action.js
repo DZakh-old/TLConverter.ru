@@ -1,8 +1,8 @@
 'use strict';
 
 let originData;
-let resultBoard = document.getElementById('result-board');
-let copyBtn = document.getElementById('copy-btn');
+let resultScreen = document.getElementById('resultScreen');
+let copycopyButton = document.getElementById('copyButton');
 
 window.onload = function() {
   if (localStorage.getItem('state-of-sw-size') == 'true')
@@ -25,8 +25,8 @@ function pressedInfo() {
 }
 
 /* Work with the result panel above the CKEditor */
-resultBoard.addEventListener('click', function() {
-  if (isHover(copyBtn) === true) {
+resultScreen.addEventListener('click', function() {
+  if (isHover(copyButton) === true) {
     copyStringToClipboard(CKEDITOR.instances.editor.getData());
   } else {
     originData = '';
@@ -35,7 +35,7 @@ resultBoard.addEventListener('click', function() {
     CKEDITOR.instances.editor.setMode('wysiwyg', function() {
       CKEDITOR.instances.editor.focus(); 
     } );
-    resultBoard.style.display = "none";
+    resultScreen.style.display = "none";
   }
 } );
 
@@ -64,7 +64,7 @@ function performPasting(evtData) {
   originData = getFixedData(evtData);
   evtData = '';
   CKEDITOR.instances.editor.setMode('source');
-  resultBoard.style.display = "block";
+  resultScreen.style.display = "block";
   processHtml(originData);
 }
 
