@@ -93,6 +93,9 @@ a {
 	border-radius: 30px 30px 0 0 / 15px 15px 0 0;
 	background-color: var(--main-light-gray-color);
 }
+.menu__label_switch:hover {
+    filter: brightness(90%);
+}
 .menu__text {
 	display: block;
 }
@@ -105,6 +108,7 @@ a {
 	height: calc(100vh - var(--header-height) - var(--footer-height));
 	border-right: 2px dashed var(--main-light-gray-color);
 	border-left: 2px dashed var(--main-light-gray-color);
+    cursor: text;
 }
 
 /*
@@ -125,7 +129,6 @@ a {
 	bottom: 0;
 	width: 18px;
 	margin-right: 1px;
-	cursor: text;
 	background: white;
 }
 
