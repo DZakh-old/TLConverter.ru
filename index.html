@@ -82,8 +82,9 @@
 					} );
 					CKEDITOR.instances.editor.on( 'key', function (evt) {
 						let key = evt.data.keyCode;
-						if (!(key == CKEDITOR.CTRL || key == CKEDITOR.CTRL + 86))
+						if (!(key == CKEDITOR.CTRL || key == CKEDITOR.CTRL + 86)) {
 							CKEDITOR.instances.editor.setData('');	
+						}
 					} );
 				</script>
 				<div class="ckeditor__scrollGag"></div>		
@@ -111,6 +112,43 @@
 			<a class="bottomPanel__devReference" href="https://dzakh.dev" target="_blank">by Dmitry Zakh</a>
 		</div>
 	</footer>
+
+	<section class="alert hidden" id="alertScreen">
+		<div class="alert__content" id="alertContent">
+			<div class="alert__close" id="alertCloseBtn">
+				<svg class="alert__icon" xmlns="http://www.w3.org/2000/svg" fill="white" width="24" height="24" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+			</div>
+			<div class="alert__message hidden" id="mobileAlertMessage">
+				<h2 class="alert__heading">ВНИМАНИЕ!</h2>
+				<div class="alert__textContainer ">
+					<p class="alert__text">Буфер обмена на телефоне не сохраняет форматирование.</p>
+					<p class="alert__text">Для корректной работы воспользуйтесь компьютером.</p>
+				</div>
+			</div>
+			<div class="alert__message hidden" id="infoAlertMessage">
+				<h2 class="alert__heading">ИНФОРМАЦИЯ!</h2>
+				<div class="alert__textContainer alert__textContainer_align_left">
+					<p class="alert__text">Приветствую вас в конверторе текста «TLConvetor», это приложение создано для того, чтобы из вордовского текста получить HTML код, который можно вставить в редактор сайта «tl.rulate.ru» с минимумом искажений.</p>
+					<p class="alert__text">Пошаговое руководство:</p>
+					<p class="alert__text">1.  Чтобы получить результат, нужно с помощью комбинации клавиш ctrl+V вставить текст, скопированный из ворда, в зону редактора, что ограничена пунктирными линиями.</p>
+					<p class="alert__text">2.  Далее вы можете скопировать обработанный текст, нажав на кнопку «Скопируйте», или же, кликнув в иное место редактора, отчистить его. После чего можно вставить следующий текст.</p>
+					<p class="alert__text">Справка по панели управления:</p>
+					<p class="alert__text">1.  Переключатель «Size» нужен для корректной работы персонализации размера на рулете. При этом он сохраняет особые размеры (заголовка, уменьшенного примечания и тд). Если у вас удаляется что-то лишнее, попробуйте отключить данную функцию.</p>
+					<p class="alert__text">2.  Переключатель «Font» аналогичен «Size». Он управляет стилями шрифтов.</p>
+					<p class="alert__text">3.  Переключатель «Auto» в активированном состоянии автоматически добавляет полученный результат в буфер обмена. Вам не придётся лишний раз нажимать на кнопку.</p>
+					<p class="alert__text">4.  Кнопка «Info» выводит на экран руководство пользователя, которое вы сейчас читаете.</p>
+					<p class="alert__text">При нахождении какого-либо бага просьба сообщить о нём 'dmirdDZ' на рулет.</p>
+				</div>
+			</div>
+			<div class="alert__message hidden" id="imgAlertMessage">
+				<h2 class="alert__heading">ВНИМАНИЕ!</h2>
+				<div class="alert__textContainer ">
+					<p class="alert__text">В текущей версии приложения изображения не поддерживаются.<br>Они автоматически удалены.</p>
+				</div>
+			</div>
+		</div>
+	</section>
+
 	<script src="ckeditor/processing.js"></script>
 	<script src="action.js"></script>
 </body>

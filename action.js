@@ -1,8 +1,6 @@
 'use strict';
 
 let originData;
-let resultScreen = document.getElementById('resultScreen');
-let copycopyButton = document.getElementById('copyButton');
 
 window.onload = function() {
   if (localStorage.getItem('state-of-sw-size') == 'true')
@@ -20,10 +18,6 @@ function pressedSwitch(theSwitch) {
     processHtml(originData);
 }
 
-function pressedInfo() {
-  alert(manualContent);
-}
-
 /* Work with the result panel above the CKEditor */
 resultScreen.addEventListener('click', function() {
   if (isHover(copyButton) === true) {
@@ -31,7 +25,7 @@ resultScreen.addEventListener('click', function() {
   } else {
     originData = '';
     CKEDITOR.instances.editor.setData('');
-    /* It is this strange because of a bug with focus */
+    /* It is this strange because of a strange bug with focus */
     CKEDITOR.instances.editor.setMode('wysiwyg', function() {
       CKEDITOR.instances.editor.focus(); 
     } );
@@ -68,17 +62,32 @@ function performPasting(evtData) {
   processHtml(originData);
 }
 
-if (/mobile/i.test(navigator.userAgent)) {
-  alert("Буфер обмена на телефоне не сохраняет форматирование.\nДля корректной работы воспользуйтесь компьютером.");
+function pressedInfo() {
+  infoAlertMessage.classList.remove("hidden");
+  alertScreen.classList.remove("hidden");
 }
 
-let manualContent = "Приветствую вас в конверторе текста «TLConvetor», это приложение создано для того, чтобы из вордовского текста получить HTML код, который можно вставить в редактор сайта «tl.rulate.ru» с минимумом искажений.\n\
-Пошаговое руководство:\n\
-1.  Чтобы получить результат, нужно с помощью комбинации клавиш ctrl+V вставить текст, скопированный из ворда, в зону редактора, что ограничена пунктирными линиями.\n\
-2.  Далее вы можете скопировать обработанный текст, нажав на кнопку «Скопируйте», или же, кликнув в иное место редактора, отчистить его. После чего можно вставить следующий текст.\n\
-Справка по панели управления:\n\
-1.  Переключатель «Size» нужен для корректной работы персонализации размера на рулете. При этом он сохраняет особые размеры (заголовка, уменьшенного примечания и тд). Если у вас удаляется что-то лишнее, попробуйте отключить данную функцию.\n\
-2.  Переключатель «Font» аналогичен «Size». Он управляет стилями шрифтов.\n\
-3.  Переключатель «Auto» в активированном состоянии автоматически добавляет полученный результат в буфер обмена. Вам не придётся лишний раз нажимать на кнопку.\n\
-4.  Кнопка «Info» выводит на экран руководство пользователя, которое вы сейчас читаете.\n\
-При нахождении какого-либо бага просьба сообщить о нём 'dmirdDZ' на рулет.";
+/* Work with alert screen */
+let arrayOfAlertMessages = document.getElementsByClassName("alert__message");
+
+alertScreen.addEventListener('click', function() {
+  if (isHover(alertContent) == false) {
+    alertScreen.classList.add("hidden");
+    hideArrayItems(arrayOfAlertMessages);
+  }
+} );
+
+alertCloseBtn.addEventListener('click', function() {
+  alertScreen.classList.add("hidden");
+  hideArrayItems(arrayOfAlertMessages);
+} );
+
+function hideArrayItems(classElements) {
+  for (let element of classElements)
+    element.classList.add("hidden");
+}
+
+if (/mobile/i.test(navigator.userAgent)) {
+  mobileAlertMessage.classList.remove("hidden");
+  alertScreen.classList.remove("hidden");
+}
