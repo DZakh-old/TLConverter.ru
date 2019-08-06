@@ -19,7 +19,7 @@
 	<title>TLСonvertor</title>
 	<link rel="icon" href="images/site-icon.ico">
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
-	<link rel="stylesheet" href="css/style.css?v=1.2">
+	<link rel="stylesheet" href="css/style.css?v=1.4">
 	<link rel="stylesheet" href="css/media.css?v=1.1">
 </head>
 <body class="page">
@@ -118,26 +118,26 @@
 			<div class="alert__close" id="alertCloseBtn">
 				<svg class="alert__icon" xmlns="http://www.w3.org/2000/svg" fill="white" width="24" height="24" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
 			</div>
+			<div class="alert__message hidden" id="infoAlertMessage">
+				<h2 class="alert__heading">ИНФОРМАЦИЯ!</h2>
+				<div class="alert__textContainer alert__textContainer_align_left">
+					<p class="alert__text">Приветствую вас в конверторе текста <strong>TLConvetor</strong>! Это приложение создано для того, чтобы из вордовского текста получить HTML код, который можно вставить в редактор сайта <strong>tl.rulate.ru</strong> с минимумом искажений.</p><br>
+					<p class="alert__text"><strong>Пошаговое руководство:</strong></p>
+					<p class="alert__text">1.  Чтобы получить результат, нужно с помощью комбинации клавиш ctrl+V вставить текст, скопированный из ворда, в зону редактора, что ограничена пунктирными линиями.</p>
+					<p class="alert__text">2.  Далее вы можете скопировать обработанный текст, нажав на кнопку «Скопируйте», или же, кликнув в иное место редактора, отчистить его. После чего можно вставить следующий текст.</p><br>
+					<p class="alert__text"><strong>Справка по панели управления:</strong></p>
+					<p class="alert__text">1.  Переключатель «Size» нужен для корректной работы персонализации размера на рулете. При этом он сохраняет особые размеры (заголовка, уменьшенного примечания и тд). Если у вас удаляется что-то лишнее, попробуйте отключить данную функцию.</p>
+					<p class="alert__text">2.  Переключатель «Font» аналогичен «Size». Он управляет стилями шрифтов.</p>
+					<p class="alert__text">3.  Переключатель «Auto» в активированном состоянии автоматически добавляет полученный результат в буфер обмена. Вам не придётся лишний раз нажимать на кнопку.</p>
+					<p class="alert__text">4.  Кнопка «Info» выводит на экран руководство пользователя, которое вы сейчас читаете.</p><br>
+					<p class="alert__text"><em>При нахождении какого-либо бага просьба сообщить о нём 'dmirdDZ' на рулет.</em></p>
+				</div>
+			</div>
 			<div class="alert__message hidden" id="mobileAlertMessage">
 				<h2 class="alert__heading">ВНИМАНИЕ!</h2>
 				<div class="alert__textContainer ">
 					<p class="alert__text">Буфер обмена на телефоне не сохраняет форматирование.</p>
 					<p class="alert__text">Для корректной работы воспользуйтесь компьютером.</p>
-				</div>
-			</div>
-			<div class="alert__message hidden" id="infoAlertMessage">
-				<h2 class="alert__heading">ИНФОРМАЦИЯ!</h2>
-				<div class="alert__textContainer alert__textContainer_align_left">
-					<p class="alert__text">Приветствую вас в конверторе текста «TLConvetor», это приложение создано для того, чтобы из вордовского текста получить HTML код, который можно вставить в редактор сайта «tl.rulate.ru» с минимумом искажений.</p>
-					<p class="alert__text">Пошаговое руководство:</p>
-					<p class="alert__text">1.  Чтобы получить результат, нужно с помощью комбинации клавиш ctrl+V вставить текст, скопированный из ворда, в зону редактора, что ограничена пунктирными линиями.</p>
-					<p class="alert__text">2.  Далее вы можете скопировать обработанный текст, нажав на кнопку «Скопируйте», или же, кликнув в иное место редактора, отчистить его. После чего можно вставить следующий текст.</p>
-					<p class="alert__text">Справка по панели управления:</p>
-					<p class="alert__text">1.  Переключатель «Size» нужен для корректной работы персонализации размера на рулете. При этом он сохраняет особые размеры (заголовка, уменьшенного примечания и тд). Если у вас удаляется что-то лишнее, попробуйте отключить данную функцию.</p>
-					<p class="alert__text">2.  Переключатель «Font» аналогичен «Size». Он управляет стилями шрифтов.</p>
-					<p class="alert__text">3.  Переключатель «Auto» в активированном состоянии автоматически добавляет полученный результат в буфер обмена. Вам не придётся лишний раз нажимать на кнопку.</p>
-					<p class="alert__text">4.  Кнопка «Info» выводит на экран руководство пользователя, которое вы сейчас читаете.</p>
-					<p class="alert__text">При нахождении какого-либо бага просьба сообщить о нём 'dmirdDZ' на рулет.</p>
 				</div>
 			</div>
 			<div class="alert__message hidden" id="imgAlertMessage">
@@ -146,10 +146,20 @@
 					<p class="alert__text">В текущей версии приложения изображения не поддерживаются.<br>Они автоматически удалены.</p>
 				</div>
 			</div>
+			<div class="alert__message hidden" id="tableAlertMessage">
+				<h2 class="alert__heading">ВНИМАНИЕ!</h2>
+				<div class="alert__textContainer ">
+					<p class="alert__text">В тексте обнаружена таблица.</p>
+					<p class="alert__text">Она может отображаться некоректно.</p>
+					<br>
+					<p class="alert__text">К сожалению, так как в моих произведениях нету ничего подобного, я не могу нормально протестировать данный функционал.</p>
+					<p class="alert__text">Посему прошу вас посодействовать в разработке и прислать документ с таблицей из какой-либо новеллы на почту dmirdDZ@gmail.com или в личниые сообщения одноименного аккаунта на Рулейте.</p>
+				</div>
+			</div>
 		</div>
 	</section>
 
-	<script src="ckeditor/processing.js"></script>
-	<script src="action.js"></script>
+	<script src="ckeditor/processing.js?v=1.2"></script>
+	<script src="action.js?v=1.2"></script>
 </body>
 </html>

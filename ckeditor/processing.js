@@ -4,7 +4,11 @@ function getFixedData(data) {
   if (data.match(/<img/gim)) {
     imgAlertMessage.classList.remove("hidden");
     alertScreen.classList.remove("hidden");
-    return data.replace(/<img src="\S*" \S* \S* \/>/gim, '');
+    data = data.replace(/(?<=<img )src="\S*"/gim, '');
+  }
+  if (data.match(/<table/gim)) {
+    tableAlertMessage.classList.remove("hidden");
+    alertScreen.classList.remove("hidden");
   }
   return data;
 }
