@@ -66,6 +66,11 @@
   .page {
     overflow-x: scroll;
   }
+  .alert {
+    position: absolute;
+    min-width: 260px;
+    min-height: 100vh;
+  }
 }
 
 /*
