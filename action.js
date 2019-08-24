@@ -1,8 +1,19 @@
 'use strict';
 
 let originData;
+let browserError;
 
 window.onload = function() {
+  if (!(navigator.userAgent.indexOf('AppleWebKit') != -1)) {
+    browserError = true;
+    alertCloseBtn.classList.add("hidden");
+    browserAlertMessage.classList.remove("hidden");
+    alertScreen.classList.remove("hidden");
+  } else if (/mobile/i.test(navigator.userAgent)) {
+    mobileAlertMessage.classList.remove("hidden");
+    alertScreen.classList.remove("hidden");
+  }
+
   if (localStorage.getItem('state-of-sw-size') == 'true')
     document.getElementById('sw-size').checked = true;
   if (localStorage.getItem('state-of-sw-font') == 'true')
@@ -62,16 +73,12 @@ function performPasting(evtData) {
   processHtml(originData);
 }
 
-function pressedInfo() {
-  infoAlertMessage.classList.remove("hidden");
-  alertScreen.classList.remove("hidden");
-}
 
 /* Work with alert screen */
 let arrayOfAlertMessages = document.getElementsByClassName("alert__message");
 
 alertScreen.addEventListener('click', function() {
-  if (isHover(alertContent) == false) {
+  if (isHover(alertContent) == false && browserError == false) {
     alertScreen.classList.add("hidden");
     hideArrayItems(arrayOfAlertMessages);
   }
@@ -87,7 +94,7 @@ function hideArrayItems(classElements) {
     element.classList.add("hidden");
 }
 
-if (/mobile/i.test(navigator.userAgent)) {
-  mobileAlertMessage.classList.remove("hidden");
+function pressedInfo() {
+  infoAlertMessage.classList.remove("hidden");
   alertScreen.classList.remove("hidden");
 }
