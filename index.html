@@ -1,174 +1,177 @@
 <!DOCTYPE html>
 <html lang="ru">
-<head>
-	<!-- Global site tag (gtag.js) - Google Analytics -->
-	<script async src="https://www.googletagmanager.com/gtag/js?id=UA-144010670-1"></script>
-	<script>
-		window.dataLayer = window.dataLayer || [];
-		function gtag(){dataLayer.push(arguments);}
-		gtag('js', new Date());
-		gtag('config', 'UA-144010670-1');
-	</script>
-	<meta name="google-site-verification" content="9Wym74xcdwjB6w6uPpwXrgIdMLlhgKsWNdybvfaCuFs" />
-	<meta name="yandex-verification" content="2f18e461b9ebabef" />
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Конвертация вордового текста для сайта tl.rulete.ru в один клик.">
-	<meta name="keywords" content="TLConverter, tl converter, конвертация текста, получить сырой код из ворда, tl.rulate.ru, dzakh">
-	<meta name="theme-color" content="#323639"/>
-	<title>TLСonvertor</title>
-	<link rel="icon" href="images/site-icon.ico">
-	<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap">
-	<link rel="stylesheet" href="css/style.css?v=1.4">
-	<link rel="stylesheet" href="css/media.css?v=1.2">
-</head>
-<body class="page">
-	<header class="topPanel">
-		<div class="container topPanel__inner">
-			<h1 class="logo">TLC<span class="logo__hidingSpan">onverter</span></h1>
-			<ul class="menu">
-				<li class="menu__item">
-					<input class="menu__checkbox" type="checkbox" onclick="pressedSwitch('sw-size')" id="sw-size"/>
-					<label class="menu__label menu__label_switch" for="sw-size">
-						<img alt="size-icon" src="images/outline-format_size-24px.svg" />
-						<span class="menu__text">Size</span>
-					</label>
-				</li>
-				<li class="menu__item">
-					<input class="menu__checkbox" type="checkbox" onclick="pressedSwitch('sw-font')" id="sw-font"/>
-					<label class="menu__label menu__label_switch" for="sw-font">
-						<img alt="font-icon" src="images/outline-font_download-24px.svg" />
-						<span class="menu__text">Font</span>
-					</label>
-				</li>
-				<li class="menu__item">
-					<input class="menu__checkbox" type="checkbox" onclick="pressedSwitch('sw-auto')" id="sw-auto" />
-					<label class="menu__label menu__label_switch" for="sw-auto">
-					 	<img alt="auto-icon" src="images/outline-autorenew-24px.svg" />
-						<span class="menu__text">Auto</span>
-					</label>
-				</li>
-				<li class="menu__item">
-					<input class="menu__checkbox" type="checkbox" onclick="pressedInfo()" id="info-btn" />
-				<label class="menu__label" for="info-btn">
-				 	<img alt="info-icon" src="images/outline-help_outline-24px.svg" />
-					<span class="menu__text">Info</span>
-				</label>
-				</li>
-			</ul>
-		</div>
-	</header>
-	<main class="workingZone">
-		<div class="container workingZone__inner">
-			<div class="notification notification_position_center" >
-				<img class="notification__pasteImg" alt="paste-img" src="images/paste-from-clipboard.svg" />
-				<p class="notification__text">Вставьте текст</p>
-				<p class="notification__text notification__text_theme_message notification__text_size_s">!: Разработчику будет приятно, если вы поделитесь приложением со знакомыми переводчиками :D</p>
-			</div>
-			<div class="ckeditor">
-				<script src="ckeditor/ckeditor.js"></script>
-				<textarea class="ckeditor__textarea" name="editor" id="editor"></textarea>	
-				<script>
-					CKEDITOR.replace( 'editor', {
-						allowedContent: true,
-						startupFocus : true,
-						toolbar: []
-					} );
-					CKEDITOR.instances.editor.on( 'blur', function() {
-						CKEDITOR.instances.editor.focus(); 
-					} );
-					CKEDITOR.instances.editor.on( 'paste', function (evt) {
-						performPasting(evt.data.dataValue);
-					} );
-					CKEDITOR.instances.editor.on( 'key', function (evt) {
-						let key = evt.data.keyCode;
-						if (!(key == CKEDITOR.CTRL || key == CKEDITOR.CTRL + 86)) {
-							CKEDITOR.instances.editor.setData('');	
-						}
-					} );
-				</script>
-				<div class="ckeditor__scrollGag"></div>		
-			</div>				
-			<div class="resultScreen" id="resultScreen">
-				<div class="notification notification_position_center">
-					<button class="notification__copyButton" id="copyButton">Скопируйте</button>
-					<p class="notification__text notification__text_size_s">или</p>
-					<p class="notification__text">
-						Вставьте
-						<br />
-						следующий
-						<br />
-						текст
-					</p>
-				</div>
-			</div>
-			<p class="donation">
-				<a class="donation__link" href="https://money.yandex.ru/to/410011934415775/50" target="_blank" rel="noopener">Поддержите проект звонкой монетой!</a>
-			</p>	
-		</div>
-	</main>
-	<footer class="bottomPanel">
-		<div class="container bottomPanel__inner">
-			<a class="bottomPanel__devReference" href="https://dzakh.dev" target="_blank">by Dmitry Zakh</a>
-		</div>
-	</footer>
+  <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144010670-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+      gtag('config', 'UA-144010670-1');
+    </script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Конвертация вордового текста для сайта tl.rulete.ru в один клик." />
+    <meta name="keywords" content="TLConverter, tl converter, конвертация текста, получить сырой код из ворда, tl.rulate.ru, dzakh" />
+    <meta name="theme-color" content="#323639" />
+    <title>TLСonvertor</title>
+    <link rel="icon" href="images/site-icon.ico" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto&display=swap" />
+    <link rel="stylesheet" href="css/style.css?v=1.4" />
+    <link rel="stylesheet" href="css/media.css?v=1.2" />
+  </head>
+  <body class="page">
+    <header class="topPanel">
+      <div class="container topPanel__inner">
+        <h1 class="logo">TLC<span class="logo__hidingSpan">onverter</span></h1>
+        <ul class="menu">
+          <li class="menu__item">
+            <input class="menu__checkbox" type="checkbox" onclick="pressedSwitch('sw-size')" id="sw-size" />
+            <label class="menu__label menu__label_switch" for="sw-size">
+              <img alt="size-icon" src="images/outline-format_size-24px.svg" />
+              <span class="menu__text">Size</span>
+            </label>
+          </li>
+          <li class="menu__item">
+            <input class="menu__checkbox" type="checkbox" onclick="pressedSwitch('sw-font')" id="sw-font" />
+            <label class="menu__label menu__label_switch" for="sw-font">
+              <img alt="font-icon" src="images/outline-font_download-24px.svg" />
+              <span class="menu__text">Font</span>
+            </label>
+          </li>
+          <li class="menu__item">
+            <input class="menu__checkbox" type="checkbox" onclick="pressedSwitch('sw-auto')" id="sw-auto" />
+            <label class="menu__label menu__label_switch" for="sw-auto">
+              <img alt="auto-icon" src="images/outline-autorenew-24px.svg" />
+              <span class="menu__text">Auto</span>
+            </label>
+          </li>
+          <li class="menu__item">
+            <input class="menu__checkbox" type="checkbox" onclick="pressedInfo()" id="info-btn" />
+            <label class="menu__label" for="info-btn">
+              <img alt="info-icon" src="images/outline-help_outline-24px.svg" />
+              <span class="menu__text">Info</span>
+            </label>
+          </li>
+        </ul>
+      </div>
+    </header>
+    <main class="workingZone">
+      <div class="container workingZone__inner">
+        <div class="notification notification_position_center">
+          <img class="notification__pasteImg" alt="paste-img" src="images/paste-from-clipboard.svg" />
+          <p class="notification__text">Вставьте текст</p>
+          <p class="notification__text notification__text_theme_message notification__text_size_s">!: Разработчику будет приятно, если вы поделитесь приложением со знакомыми переводчиками :D</p>
+        </div>
+        <div class="ckeditor">
+          <script src="ckeditor/ckeditor.js"></script>
+          <textarea class="ckeditor__textarea" name="editor" id="editor"></textarea>
+          <script>
+            CKEDITOR.replace('editor', {
+              allowedContent: true,
+              startupFocus: true,
+              toolbar: []
+            });
+            CKEDITOR.instances.editor.on('blur', function() {
+              CKEDITOR.instances.editor.focus();
+            });
+            CKEDITOR.instances.editor.on('paste', function(evt) {
+              performPasting(evt.data.dataValue);
+            });
+            CKEDITOR.instances.editor.on('key', function(evt) {
+              let key = evt.data.keyCode;
+              if (!(key == CKEDITOR.CTRL || key == CKEDITOR.CTRL + 86)) {
+                CKEDITOR.instances.editor.setData('');
+              }
+            });
+          </script>
+          <div class="ckeditor__scrollGag"></div>
+        </div>
+        <div class="resultScreen" id="resultScreen">
+          <div class="notification notification_position_center">
+            <button class="notification__copyButton" id="copyButton">Скопируйте</button>
+            <p class="notification__text notification__text_size_s">или</p>
+            <p class="notification__text">
+              Вставьте
+              <br />
+              следующий
+              <br />
+              текст
+            </p>
+          </div>
+        </div>
+        <p class="donation">
+          <a class="donation__link" href="https://money.yandex.ru/to/410011934415775/50" target="_blank" rel="noopener">Поддержите проект звонкой монетой!</a>
+        </p>
+      </div>
+    </main>
+    <footer class="bottomPanel">
+      <div class="container bottomPanel__inner">
+        <a class="bottomPanel__devReference" href="https://github.com/DZakh" target="_blank">by DZakh</a>
+      </div>
+    </footer>
 
-	<section class="alert hidden" id="alertScreen">
-		<div class="alert__content" id="alertContent">
-			<div class="alert__close" id="alertCloseBtn">
-				<svg class="alert__icon" xmlns="http://www.w3.org/2000/svg" fill="white" width="24" height="24" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-			</div>
-			<div class="alert__message hidden" id="infoAlertMessage">
-				<h2 class="alert__heading">ИНФОРМАЦИЯ!</h2>
-				<div class="alert__textContainer alert__textContainer_align_left">
-					<p class="alert__text">Приветствую вас в конверторе текста <strong>TLConvetor</strong>! Это приложение создано для того, чтобы из вордовского текста получить HTML код, который можно вставить в редактор сайта <strong>tl.rulate.ru</strong> с минимумом искажений.</p><br>
-					<p class="alert__text"><strong>Пошаговое руководство:</strong></p>
-					<p class="alert__text">1.  Чтобы получить результат, нужно с помощью комбинации клавиш ctrl+V вставить текст, скопированный из ворда, в зону редактора, что ограничена пунктирными линиями.</p>
-					<p class="alert__text">2.  Далее вы можете скопировать обработанный текст, нажав на кнопку «Скопируйте», или же, кликнув в иное место редактора, отчистить его. После чего можно вставить следующий текст.</p><br>
-					<p class="alert__text"><strong>Справка по панели управления:</strong></p>
-					<p class="alert__text">1.  Переключатель «Size» нужен для корректной работы персонализации размера на рулете. При этом он сохраняет особые размеры (заголовка, уменьшенного примечания и тд). Если у вас удаляется что-то лишнее, попробуйте отключить данную функцию.</p>
-					<p class="alert__text">2.  Переключатель «Font» аналогичен «Size». Он управляет стилями шрифтов.</p>
-					<p class="alert__text">3.  Переключатель «Auto» в активированном состоянии автоматически добавляет полученный результат в буфер обмена. Вам не придётся лишний раз нажимать на кнопку.</p>
-					<p class="alert__text">4.  Кнопка «Info» выводит на экран руководство пользователя, которое вы сейчас читаете.</p><br>
-					<p class="alert__text"><em>При нахождении какого-либо бага просьба сообщить о нём 'dmirdDZ' на рулет.</em></p>
-				</div>
-			</div>
-			<div class="alert__message hidden" id="mobileAlertMessage">
-				<h2 class="alert__heading">ВНИМАНИЕ!</h2>
-				<div class="alert__textContainer ">
-					<p class="alert__text">Буфер обмена на телефоне не сохраняет форматирование.</p>
-					<p class="alert__text">Для корректной работы воспользуйтесь компьютером.</p>
-				</div>
-			</div>
-			<div class="alert__message hidden" id="imgAlertMessage">
-				<h2 class="alert__heading">ВНИМАНИЕ!</h2>
-				<div class="alert__textContainer ">
-					<p class="alert__text">В текущей версии приложения изображения не поддерживаются.<br>Они автоматически удалены.</p>
-				</div>
-			</div>
-			<div class="alert__message hidden" id="tableAlertMessage">
-				<h2 class="alert__heading">ВНИМАНИЕ!</h2>
-				<div class="alert__textContainer ">
-					<p class="alert__text">В тексте обнаружена таблица.</p>
-					<p class="alert__text">Она может отображаться некоректно.</p>
-					<br>
-					<p class="alert__text">К сожалению, так как в моих произведениях нету ничего подобного, я не могу нормально протестировать данный функционал.</p>
-					<p class="alert__text">Посему прошу вас посодействовать в разработке и прислать документ с таблицей из какой-либо новеллы на почту dmirdDZ@gmail.com или в личниые сообщения одноименного аккаунта на Рулейте.</p>
-				</div>
-			</div>
-			<div class="alert__message hidden" id="browserAlertMessage">
-				<h2 class="alert__heading">ВНИМАНИЕ!</h2>
-				<div class="alert__textContainer ">
-					<p class="alert__text"><strong>Ваш браузер не поддерживается.</strong></p>
-					<p class="alert__text">Приложение корректно работает лишь в браузерах на технологии webkit:<br>Chrome, Yandex, Opera, Safari.</p>
-					<p class="alert__text">Благодарю за понимание!</p>
-					<p class="alert__text"><small>P.S. Если у вас старая версия одного из этих браузеров, может также потребоваться обновление.</small></p>
-				</div>
-			</div>
-		</div>
-	</section>
+    <section class="alert hidden" id="alertScreen">
+      <div class="alert__content" id="alertContent">
+        <div class="alert__close" id="alertCloseBtn">
+          <svg class="alert__icon" xmlns="http://www.w3.org/2000/svg" fill="white" width="24" height="24" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" /></svg>
+        </div>
+        <div class="alert__message hidden" id="infoAlertMessage">
+          <h2 class="alert__heading">ИНФОРМАЦИЯ!</h2>
+          <div class="alert__textContainer alert__textContainer_align_left">
+            <p class="alert__text">Приветствую вас в конверторе текста <strong>TLConvetor</strong>! Это приложение создано для того, чтобы из вордовского текста получить HTML код, который можно вставить в редактор сайта <strong>tl.rulate.ru</strong> с минимумом искажений.</p>
+            <br />
+            <p class="alert__text"><strong>Пошаговое руководство:</strong></p>
+            <p class="alert__text">1. Чтобы получить результат, нужно с помощью комбинации клавиш ctrl+V вставить текст, скопированный из ворда, в зону редактора, что ограничена пунктирными линиями.</p>
+            <p class="alert__text">2. Далее вы можете скопировать обработанный текст, нажав на кнопку «Скопируйте», или же, кликнув в иное место редактора, отчистить его. После чего можно вставить следующий текст.</p>
+            <br />
+            <p class="alert__text"><strong>Справка по панели управления:</strong></p>
+            <p class="alert__text">1. Переключатель «Size» нужен для корректной работы персонализации размера на рулете. При этом он сохраняет особые размеры (заголовка, уменьшенного примечания и тд). Если у вас удаляется что-то лишнее, попробуйте отключить данную функцию.</p>
+            <p class="alert__text">2. Переключатель «Font» аналогичен «Size». Он управляет стилями шрифтов.</p>
+            <p class="alert__text">3. Переключатель «Auto» в активированном состоянии автоматически добавляет полученный результат в буфер обмена. Вам не придётся лишний раз нажимать на кнопку.</p>
+            <p class="alert__text">4. Кнопка «Info» выводит на экран руководство пользователя, которое вы сейчас читаете.</p>
+            <br />
+            <p class="alert__text"><em>При нахождении какого-либо бага просьба сообщить о нём 'dmirdDZ' на рулет.</em></p>
+          </div>
+        </div>
+        <div class="alert__message hidden" id="mobileAlertMessage">
+          <h2 class="alert__heading">ВНИМАНИЕ!</h2>
+          <div class="alert__textContainer ">
+            <p class="alert__text">Буфер обмена на телефоне не сохраняет форматирование.</p>
+            <p class="alert__text">Для корректной работы воспользуйтесь компьютером.</p>
+          </div>
+        </div>
+        <div class="alert__message hidden" id="imgAlertMessage">
+          <h2 class="alert__heading">ВНИМАНИЕ!</h2>
+          <div class="alert__textContainer ">
+            <p class="alert__text">В текущей версии приложения изображения не поддерживаются.<br />Они автоматически удалены.</p>
+          </div>
+        </div>
+        <div class="alert__message hidden" id="tableAlertMessage">
+          <h2 class="alert__heading">ВНИМАНИЕ!</h2>
+          <div class="alert__textContainer ">
+            <p class="alert__text">В тексте обнаружена таблица.</p>
+            <p class="alert__text">Она может отображаться некоректно.</p>
+            <br />
+            <p class="alert__text">К сожалению, так как в моих произведениях нету ничего подобного, я не могу нормально протестировать данный функционал.</p>
+            <p class="alert__text">Посему прошу вас посодействовать в разработке и прислать документ с таблицей из какой-либо новеллы на почту dmirdDZ@gmail.com или в личниые сообщения одноименного аккаунта на Рулейте.</p>
+          </div>
+        </div>
+        <div class="alert__message hidden" id="browserAlertMessage">
+          <h2 class="alert__heading">ВНИМАНИЕ!</h2>
+          <div class="alert__textContainer ">
+            <p class="alert__text"><strong>Ваш браузер не поддерживается.</strong></p>
+            <p class="alert__text">Приложение корректно работает лишь в браузерах на технологии webkit:<br />Chrome, Yandex, Opera, Safari.</p>
+            <p class="alert__text">Благодарю за понимание!</p>
+            <p class="alert__text"><small>P.S. Если у вас старая версия одного из этих браузеров, может также потребоваться обновление.</small></p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-	<script src="ckeditor/processing.js?v=1.3"></script>
-	<script src="action.js?v=1.2"></script>
-</body>
+    <script src="processing-text.js?v=1.4"></script>
+    <script src="action.js?v=1.4"></script>
+  </body>
 </html>
