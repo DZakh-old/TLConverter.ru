@@ -1,27 +1,28 @@
 'use strict';
 
 let originData;
-let resultScreen = document.getElementById('resultScreen');
-let copycopyButton = document.getElementById('copyButton');
+let browserError;
 
 window.onload = function() {
-  if (localStorage.getItem('state-of-sw-size') == 'true')
-    document.getElementById('sw-size').checked = true;
-  if (localStorage.getItem('state-of-sw-font') == 'true')
-    document.getElementById('sw-font').checked = true;
-  if (localStorage.getItem('state-of-sw-auto') == 'true')
-    document.getElementById('sw-auto').checked = true;
-}
+  if (!(navigator.userAgent.indexOf('AppleWebKit') != -1)) {
+    browserError = true;
+    alertCloseBtn.classList.add('hidden');
+    browserAlertMessage.classList.remove('hidden');
+    alertScreen.classList.remove('hidden');
+  } else if (/mobile/i.test(navigator.userAgent)) {
+    mobileAlertMessage.classList.remove('hidden');
+    alertScreen.classList.remove('hidden');
+  }
+
+  if (localStorage.getItem('state-of-sw-size') == 'true') document.getElementById('sw-size').checked = true;
+  if (localStorage.getItem('state-of-sw-font') == 'true') document.getElementById('sw-font').checked = true;
+  if (localStorage.getItem('state-of-sw-auto') == 'true') document.getElementById('sw-auto').checked = true;
+};
 
 function pressedSwitch(theSwitch) {
   let state = document.getElementById(theSwitch).checked;
   localStorage.setItem('state-of-' + theSwitch, state);
-  if (theSwitch !== 'sw-auto' && CKEDITOR.instances.editor.mode === 'source')
-    processHtml(originData);
-}
-
-function pressedInfo() {
-  alert(manualContent);
+  if (theSwitch !== 'sw-auto' && CKEDITOR.instances.editor.mode === 'source') processHtml(originData);
 }
 
 /* Work with the result panel above the CKEditor */
@@ -31,18 +32,19 @@ resultScreen.addEventListener('click', function() {
   } else {
     originData = '';
     CKEDITOR.instances.editor.setData('');
-    /* It is this strange because of a bug with focus */
+    /* It is this strange because of a strange bug with focus */
     CKEDITOR.instances.editor.setMode('wysiwyg', function() {
-      CKEDITOR.instances.editor.focus(); 
-    } );
-    resultScreen.style.display = "none";
+      CKEDITOR.instances.editor.focus();
+    });
+    resultScreen.style.display = 'none';
   }
-} );
+});
 
 function isHover(element) {
-  return (element.parentElement.querySelector(':hover') === element);
+  return element.parentElement.querySelector(':hover') === element;
 }
 
+// From StackOverflow
 function copyStringToClipboard(str) {
   /* Create new element */
   let el = document.createElement('textarea');
@@ -50,7 +52,7 @@ function copyStringToClipboard(str) {
   el.value = str;
   /* Set non-editable to avoid focus and move outside of view */
   el.setAttribute('readonly', '');
-  el.style = {position: 'absolute', left: '-9999px'};
+  el.style = { position: 'absolute', left: '-9999px' };
   document.body.appendChild(el);
   /* Select text inside element */
   el.select();
@@ -64,21 +66,30 @@ function performPasting(evtData) {
   originData = getFixedData(evtData);
   evtData = '';
   CKEDITOR.instances.editor.setMode('source');
-  resultScreen.style.display = "block";
+  resultScreen.style.display = 'block';
   processHtml(originData);
 }
 
-if (/mobile/i.test(navigator.userAgent)) {
-  alert("Буфер обмена на телефоне не сохраняет форматирование.\nДля корректной работы воспользуйтесь компьютером.");
+/* Work with alert screen */
+let arrayOfAlertMessages = document.getElementsByClassName('alert__message');
+
+alertScreen.addEventListener('click', function() {
+  if (isHover(alertContent) == false && browserError == false) {
+    alertScreen.classList.add('hidden');
+    hideArrayItems(arrayOfAlertMessages);
+  }
+});
+
+alertCloseBtn.addEventListener('click', function() {
+  alertScreen.classList.add('hidden');
+  hideArrayItems(arrayOfAlertMessages);
+});
+
+function hideArrayItems(classElements) {
+  for (let element of classElements) element.classList.add('hidden');
 }
 
-let manualContent = "Приветствую вас в конверторе текста «TLConvetor», это приложение создано для того, чтобы из вордовского текста получить HTML код, который можно вставить в редактор сайта «tl.rulate.ru» с минимумом искажений.\n\
-Пошаговое руководство:\n\
-1.  Чтобы получить результат, нужно с помощью комбинации клавиш ctrl+V вставить текст, скопированный из ворда, в зону редактора, что ограничена пунктирными линиями.\n\
-2.  Далее вы можете скопировать обработанный текст, нажав на кнопку «Скопируйте», или же, кликнув в иное место редактора, отчистить его. После чего можно вставить следующий текст.\n\
-Справка по панели управления:\n\
-1.  Переключатель «Size» нужен для корректной работы персонализации размера на рулете. При этом он сохраняет особые размеры (заголовка, уменьшенного примечания и тд). Если у вас удаляется что-то лишнее, попробуйте отключить данную функцию.\n\
-2.  Переключатель «Font» аналогичен «Size». Он управляет стилями шрифтов.\n\
-3.  Переключатель «Auto» в активированном состоянии автоматически добавляет полученный результат в буфер обмена. Вам не придётся лишний раз нажимать на кнопку.\n\
-4.  Кнопка «Info» выводит на экран руководство пользователя, которое вы сейчас читаете.\n\
-При нахождении какого-либо бага просьба сообщить о нём 'dmirdDZ' на рулет.";
+function pressedInfo() {
+  infoAlertMessage.classList.remove('hidden');
+  alertScreen.classList.remove('hidden');
+}

@@ -2,8 +2,13 @@
 
 function getFixedData(data) {
   if (data.match(/<img/gim)) {
-    alert("Изображения не поддерживаются в текущей версии. Они автоматически удалены.");
-    return data.replace(/<img src="\S*" \S* \S* \/>/gim, '');
+    imgAlertMessage.classList.remove("hidden");
+    alertScreen.classList.remove("hidden");
+    data = data.replace(/(?<=<img )src="\S*"/gim, '');
+  }
+  if (data.match(/<table/gim)) {
+    tableAlertMessage.classList.remove("hidden");
+    alertScreen.classList.remove("hidden");
   }
   return data;
 }
